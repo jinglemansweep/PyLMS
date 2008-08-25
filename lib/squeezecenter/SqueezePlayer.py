@@ -44,7 +44,12 @@ class SqueezePlayer:
         self.mode = None
         self.time = None
         self.power_state = None
+        self.ir_state = None
         self.volume = None
+        self.bass = None
+        self.treble = None
+        self.pitch = None
+        self.rate = None
         self.mixing = None
         self.track_genre = None
         self.track_artist = None
@@ -122,7 +127,7 @@ class SqueezePlayer:
         if namespace:
             pref_string += namespace + ":"
         pref_string += name
-        value = self._request("pref %s ?" % (pref_string))
+        value = self._request("playerpref %s ?" % (pref_string))
         return value
 
     def set_pref_value(self, name, value, namespace=None):
@@ -132,9 +137,9 @@ class SqueezePlayer:
             pref_string += namespace + ":"
         pref_string += name
         value = urllib.quote(value)
-        valid = self._request("pref validate %s %s" % (pref_string, value))
+        valid = self._request("playerpref validate %s %s" % (pref_string, value))
         if "valid:1" in valid:
-            self._request("pref %s %s" % (pref_string, value))
+            self._request("playerpref %s %s" % (pref_string, value))
             return True
         else:
             return False
@@ -179,11 +184,42 @@ class SqueezePlayer:
         """Set Player Power State"""
         self._request("power %i" % (int(state)))
         self.get_power_state()    
+
+    def get_ir_state(self):
+        """Get Player Infrared State"""
+        state = int(self._request("irenable ?"))
+        self.ir_state = (state != 0)
+        return self.ir_state
+
+    def set_ir_state(self, state):
+        """Set Player Power State"""
+        self._request("irenable %i" % (int(state)))
+        self.get_ir_state()   
                
     def get_volume(self):
         """Get Player Volume"""
         self.volume = int(self._request("mixer volume ?"))
         return self.volume           
+
+    def get_bass(self):
+        """Get Player Bass"""
+        self.bass = int(self._request("mixer bass ?"))
+        return self.bass    
+
+    def get_treble(self):
+        """Get Player Treble"""
+        self.treble = int(self._request("mixer treble ?"))
+        return self.treble 
+
+    def get_pitch(self):
+        """Get Player Pitch"""
+        self.pitch = int(self._request("mixer pitch ?"))
+        return self.pitch
+    
+    def get_rate(self):
+        """Get Player Rate"""
+        self.rate = int(self._request("mixer rate ?"))
+        return self.rate     
 
     def get_muting(self):
         """Get Player Muting Status"""
@@ -271,6 +307,70 @@ class SqueezePlayer:
         if volume > 100: volume = 100
         self._request("mixer volume %i" % (volume))
 
+    def set_bass(self, bass):
+        """Set Player Bass"""
+        if bass < -100: bass = -100
+        if bass > 100: bass = 100
+        self._request("mixer bass %i" % (bass))
+
+    def bass_up(self, amount=5):
+        """Increase Player Bass"""
+        self._request("mixer bass +%i" % (amount))
+        self.get_bass()
+
+    def bass_down(self, amount=5):
+        """Decrease Player Bass"""
+        self._request("mixer bass -%i" % (amount))
+        self.get_bass()
+
+    def set_treble(self, treble):
+        """Set Player Treble"""
+        if treble < -100: treble = -100
+        if treble > 100: treble = 100
+        self._request("mixer treble %i" % (treble))
+
+    def treble_up(self, amount=5):
+        """Increase Player Treble"""
+        self._request("mixer treble +%i" % (amount))
+        self.get_treble()
+
+    def treble_down(self, amount=5):
+        """Decrease Player Treble"""
+        self._request("mixer treble -%i" % (amount))
+        self.get_treble()
+
+    def set_pitch(self, pitch):
+        """Set Player Pitch"""
+        if pitch < 80: pitch = 80
+        if pitch > 120: pitch = 120
+        self._request("mixer pitch %i" % (pitch))
+
+    def pitch_up(self, amount=5):
+        """Increase Player Pitch"""
+        self._request("mixer pitch +%i" % (amount))
+        self.get_pitch()
+
+    def pitch_down(self, amount=5):
+        """Decrease Player Pitch"""
+        self._request("mixer pitch -%i" % (amount))
+        self.get_pitch()
+
+    def set_rate(self, rate):
+        """Set Player Rate"""
+        if rate < -4: rate = 4
+        if rate > 4: rate = 4
+        self._request("mixer rate %i" % (rate))
+
+    def rate_up(self, amount=1):
+        """Increase Player Rate"""
+        self._request("mixer rate +%i" % (amount))
+        self.get_rate()
+
+    def rate_down(self, amount=1):
+        """Decrease Player Rate"""
+        self._request("mixer rate -%i" % (amount))
+        self.get_rate()
+
     def volume_up(self, amount=5):
         """Increase Player Volume"""
         self._request("mixer volume +%i" % (amount))
@@ -301,6 +401,10 @@ class SqueezePlayer:
         """Seek Player Backwards"""
         self._request("time -%s" % (self.seconds))   
 
+    def ir_button(self, button):
+        """Simulate IR Button Press"""
+        self._request("button %s" % (button))   
+
     # Properties
 
     id = property(get_id)
@@ -317,7 +421,12 @@ class SqueezePlayer:
     time_remaining = property(get_time_remaining)
     mode = property(get_mode)
     power_state = property(get_power_state, set_power_state)   
-    volume = property(get_volume, set_volume)   
+    ir_state = property(get_ir_state, set_ir_state)
+    volume = property(get_volume, set_volume)
+    bass = property(get_bass, set_bass)
+    treble = property(get_treble, set_treble)
+    pitch  = property(get_pitch, set_pitch)
+    rate = property(get_rate, set_rate)
     muting = property(get_muting, set_muting)  
     track_genre = property(get_track_genre)
     track_artist = property(get_track_artist)
