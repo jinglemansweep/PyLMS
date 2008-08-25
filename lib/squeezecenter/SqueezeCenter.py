@@ -61,7 +61,7 @@ class SqueezeCenter:
             result = response[len(command_string)-1:-1]
             return result
 
-        def get_players(self):
+        def _get_players(self):
             """
             Get Players
             """
@@ -101,5 +101,6 @@ class SqueezeCenter:
             """
             self._connect()
             self._login()
+            self._get_players()
             
 

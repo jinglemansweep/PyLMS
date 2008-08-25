@@ -10,20 +10,18 @@ SC_PASSWORD="shredder"
 
 sc = SqueezeCenter(hostname=SC_HOST, port=SC_PORT, username=SC_USERNAME, password=SC_PASSWORD)
 sc.connect()
-print sc.logged_in
-print "Version: %s!" % sc.get_version()
-players = sc.get_players()
-print players
+
+print "Logged in: %s" % sc.logged_in
+print "Version: %s" % sc.get_version()
+
 sq = sc.get_player("00:04:20:12:6e:57")
-print sq.name
-print sq.get_mode()
-print sq.get_time()
-print sq.is_connected
-sq.set_name("SqueezeBox")
-sq.set_power_state(True)
-print sq.get_power_state()
-print sq.get_volume()
-sq.set_volume(90)
-sq.unmute()
-print sq.get_volume()
-print sq.get_muting()
+
+print "Name: %s | Mode: %s | Time: %s | Connected: %s | WiFi: %s" % (sq.name, sq.get_mode(), sq.get_time_elapsed(), sq.is_connected, sq.get_wifi_signal_strength())
+
+print sq.get_track_title()
+print sq.get_track_duration()
+print sq.get_time_remaining()
+print sq.has_permission("power")
+print sq.get_pref_value("audiodir")
+
+print sq.set_pref_value("audiodir", "ds0d0")
