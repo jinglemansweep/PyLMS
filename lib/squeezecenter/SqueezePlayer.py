@@ -81,6 +81,8 @@ class SqueezePlayer:
         self.is_player = bool(urllib.unquote(self.sc._request("player isplayer %i ?" % index))) 
         self.is_connected = bool(urllib.unquote(self.sc._request("player connected %i ?" % index))) 
 
+    ## getters/setters
+
     def get_id(self):
         """Get Player ID"""
         return self.id
@@ -273,6 +275,36 @@ class SqueezePlayer:
         self.track_path = str(self._request("path ?"))
         return self.track_path
     
+    # playlist
+    
+    def playlist_play(self, item):
+        """Play Item Immediately"""
+        item = urllib.quote(item)
+        self._request("playlist play %s" % (item))        
+
+    def playlist_play(self, item):
+        """Add Item To Playlist"""
+        item = urllib.quote(item)
+        self._request("playlist add %s" % (item))    
+    
+    def playlist_insert(self, item):
+        """Insert Item Into Playlist (After Current Track)"""
+        item = urllib.quote(item)
+        self._request("playlist insert %s" % (item))
+
+    def playlist_delete(self, item):
+        """Delete Item From Playlist By Name"""
+        item = urllib.quote(item)
+        self._request("playlist deleteitem %s" % (item))
+
+    def playlist_move(self, from_index, to_index):
+        """Move Item In Playlist"""
+        self._request("playlist move %i %i" % (from_index, to_index))
+ 
+    def playlist_erase(self, index):
+        """Erase Item From Playlist"""
+        self._request("playlist delete %i" % (index))
+    
     # actions
                
     def show(self, line1="", line2="", duration=3, brightness=4, font="standard", centered=False):
@@ -393,11 +425,11 @@ class SqueezePlayer:
         """Seek Player"""
         self._request("time %s" % (self.seconds))
         
-    def forward(self, seconds):
+    def forward(self, seconds=10):
         """Seek Player Forward"""
         self._request("time +%s" % (self.seconds))        
 
-    def rewind(self, seconds):
+    def rewind(self, seconds=10):
         """Seek Player Backwards"""
         self._request("time -%s" % (self.seconds))   
 
