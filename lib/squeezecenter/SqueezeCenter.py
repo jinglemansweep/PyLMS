@@ -78,7 +78,7 @@ class SqueezeCenter:
             """
             if id:
                 for player in self.players:
-                    if str(player._properties["id"]).lower() == str(id).lower():
+                    if str(player.id) == str(id).lower():
                         return player
 
         def get_version(self):

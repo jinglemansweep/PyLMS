@@ -15,7 +15,15 @@ print "Version: %s!" % sc.get_version()
 players = sc.get_players()
 print players
 sq = sc.get_player("00:04:20:12:6e:57")
-print sq.get_name()
-sq.show(line1="HELLO", line2="TPOO")
+print sq.name
 print sq.get_mode()
 print sq.get_time()
+print sq.is_connected
+sq.set_name("SqueezeBox")
+sq.set_power_state(True)
+print sq.get_power_state()
+print sq.get_volume()
+sq.set_volume(90)
+sq.unmute()
+print sq.get_volume()
+print sq.get_muting()
