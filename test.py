@@ -3,10 +3,10 @@
 from lib.squeezecenter.SqueezeCenter import SqueezeCenter
 from lib.squeezecenter.SqueezePlayer import SqueezePlayer
 
-SC_HOST="weasel"
+SC_HOST="localhost"
 SC_PORT="9090"
-SC_USERNAME="admin"
-SC_PASSWORD="shredder"
+SC_USERNAME="user"
+SC_PASSWORD="password"
 
 sc = SqueezeCenter(hostname=SC_HOST, port=SC_PORT, username=SC_USERNAME, password=SC_PASSWORD)
 sc.connect()

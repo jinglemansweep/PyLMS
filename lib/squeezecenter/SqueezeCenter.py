@@ -50,7 +50,7 @@ class SqueezeCenter:
             Login
             """
             result = self._request("login %s %s" % (self.username, self.password))
-            self.logged_in = (result == "")
+            self.logged_in = (result == "******")
             
         def _request(self, command_string):
             """
