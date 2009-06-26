@@ -241,7 +241,7 @@ class SqueezePlayer:
 
     def get_track_artist(self):
         """Get Players Current Track Artist"""
-        self.track_album = str(self._request("artist ?"))
+        self.track_artist = str(self._request("artist ?"))
         return self.track_artist
     
     def get_track_album(self):
