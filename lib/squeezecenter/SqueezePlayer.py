@@ -332,6 +332,14 @@ class SqueezePlayer:
     def toggle(self):
         """Play/Pause Toggle"""
         self._request("pause")
+
+    def next(self):
+        """Next Track"""
+        self._request("playlist jump +1")
+
+    def prev(self):
+        """Previous Track"""
+        self._request("playlist jump -1")
     
     def set_volume(self, volume):
         """Set Player Volume"""
