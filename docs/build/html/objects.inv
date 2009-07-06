@@ -4,7 +4,7 @@
 pysqueezecenter.player.Player.get_track_album method player.html
 pysqueezecenter.player.Player.set_pitch method player.html
 pysqueezecenter.player.Player.playlist_move method player.html
-pysqueezecenter.player.Player.get_rate method player.html
+pysqueezecenter.server.Server.connect method server.html
 pysqueezecenter.player.Player.get_uuid method player.html
 pysqueezecenter.player.Player.track_duration attribute player.html
 pysqueezecenter.player.Player.track_genre attribute player.html
@@ -92,7 +92,7 @@ pysqueezecenter.player.Player.set_volume method player.html
 pysqueezecenter.player.Player.mode attribute player.html
 pysqueezecenter.player.Player.get_pref_value method player.html
 pysqueezecenter.player.Player.forward method player.html
-pysqueezecenter.server.Server.connect method server.html
+pysqueezecenter.player.Player.get_rate method player.html
 pysqueezecenter.player.Player.play method player.html
 pysqueezecenter.player.Player.playlist_insert method player.html
 pysqueezecenter.player.Player.unpause method player.html

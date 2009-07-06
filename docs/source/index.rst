@@ -1,11 +1,12 @@
-.. DomestOS documentation master file, created by sphinx-quickstart on Thu Feb 12 12:37:01 2009.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+PySqueezeCenter Documentation
+=============================
 
-Welcome to DomestOS's documentation!
-====================================
+PySqueezeCenter is a Python wrapper library for communication with a
+Logitech SqueezeCenter CLI (Telnet) interface. Once connected, it is
+possible to control the server and any compatible Logitech SqueezeBox
+devices associated with it.
 
-Contents:
+Modules:
 
 .. toctree::
    :maxdepth: 2
