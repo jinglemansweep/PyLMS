@@ -62,7 +62,7 @@ class Player:
         self._update(index)
 
     def __repr__(self):
-        return self.id
+        return "Player: %s" % (self.id)
     
     def _request(self, command_string):
         """Executes Telnet Request via SqueezeCenter"""
