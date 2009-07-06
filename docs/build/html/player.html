@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>pysqueezecenter.player.Player &mdash; PySqueezeCenter v0.1 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PySqueezeCenter v0.1 documentation" href="index.html" />
+    <link rel="prev" title="pysqueezecenter.server.Server" href="server.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="server.html" title="pysqueezecenter.server.Server"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PySqueezeCenter v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="pysqueezecenter-player-player">
+<h1><tt class="xref docutils literal"><span class="pre">pysqueezecenter.player.Player</span></tt><a class="headerlink" href="#pysqueezecenter-player-player" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="pysqueezecenter.player.Player">
+<em class="property">
+class </em><tt class="descclassname">pysqueezecenter.player.</tt><tt class="descname">Player</tt><big>(</big><em>sc</em>, <em>index=None</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="pysqueezecenter.player.Player.bass">
+<tt class="descname">bass</tt><a class="headerlink" href="#pysqueezecenter.player.Player.bass" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Bass</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.bass_down">
+<tt class="descname">bass_down</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.bass_down" title="Permalink to this definition">¶</a></dt>
+<dd>Decrease Player Bass</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.bass_up">
+<tt class="descname">bass_up</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.bass_up" title="Permalink to this definition">¶</a></dt>
+<dd>Increase Player Bass</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.can_power_off">
+<tt class="descname">can_power_off</tt><a class="headerlink" href="#pysqueezecenter.player.Player.can_power_off" title="Permalink to this definition">¶</a></dt>
+<dd>Player Can Power Off?</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.display_type">
+<tt class="descname">display_type</tt><a class="headerlink" href="#pysqueezecenter.player.Player.display_type" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Display Type String</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.forward">
+<tt class="descname">forward</tt><big>(</big><em>seconds=10</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.forward" title="Permalink to this definition">¶</a></dt>
+<dd>Seek Player Forward</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_bass">
+<tt class="descname">get_bass</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_bass" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Bass</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_display_type">
+<tt class="descname">get_display_type</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_display_type" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Display Type String</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_id">
+<tt class="descname">get_id</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_id" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player ID</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_ip_address">
+<tt class="descname">get_ip_address</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_ip_address" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player IP Address</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_ir_state">
+<tt class="descname">get_ir_state</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_ir_state" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Infrared State</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_mode">
+<tt class="descname">get_mode</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_mode" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Mode</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_model">
+<tt class="descname">get_model</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_model" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Model String</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_muting">
+<tt class="descname">get_muting</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_muting" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Muting Status</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_name" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Name</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_pitch">
+<tt class="descname">get_pitch</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_pitch" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Pitch</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_power_state">
+<tt class="descname">get_power_state</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_power_state" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Power State</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_pref_value">
+<tt class="descname">get_pref_value</tt><big>(</big><em>name</em>, <em>namespace=None</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_pref_value" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Preference Value</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_rate">
+<tt class="descname">get_rate</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_rate" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Rate</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_time_elapsed">
+<tt class="descname">get_time_elapsed</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_time_elapsed" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Time Elapsed</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_time_remaining">
+<tt class="descname">get_time_remaining</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_time_remaining" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Time Remaining</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_album">
+<tt class="descname">get_track_album</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_album" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Album</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_artist">
+<tt class="descname">get_track_artist</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_artist" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Artist</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_current_title">
+<tt class="descname">get_track_current_title</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_current_title" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Current Title</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_duration">
+<tt class="descname">get_track_duration</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_duration" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Duration</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_genre">
+<tt class="descname">get_track_genre</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_genre" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Genre</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_path">
+<tt class="descname">get_track_path</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_path" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Path</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_remote">
+<tt class="descname">get_track_remote</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_remote" title="Permalink to this definition">¶</a></dt>
+<dd>Is Players Current Track Remotely Hosted?</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_track_title">
+<tt class="descname">get_track_title</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_track_title" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Title</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_treble">
+<tt class="descname">get_treble</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_treble" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Treble</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_uuid">
+<tt class="descname">get_uuid</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_uuid" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player UUID</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_volume">
+<tt class="descname">get_volume</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_volume" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Volume</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.get_wifi_signal_strength">
+<tt class="descname">get_wifi_signal_strength</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.get_wifi_signal_strength" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player WiFi Signal Strength</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.has_permission">
+<tt class="descname">has_permission</tt><big>(</big><em>request_terms</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.has_permission" title="Permalink to this definition">¶</a></dt>
+<dd>Check Player User Permissions</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.id">
+<tt class="descname">id</tt><a class="headerlink" href="#pysqueezecenter.player.Player.id" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player ID</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.ip_address">
+<tt class="descname">ip_address</tt><a class="headerlink" href="#pysqueezecenter.player.Player.ip_address" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player IP Address</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.ir_button">
+<tt class="descname">ir_button</tt><big>(</big><em>button</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.ir_button" title="Permalink to this definition">¶</a></dt>
+<dd>Simulate IR Button Press</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.ir_state">
+<tt class="descname">ir_state</tt><a class="headerlink" href="#pysqueezecenter.player.Player.ir_state" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Infrared State</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.is_connected">
+<tt class="descname">is_connected</tt><a class="headerlink" href="#pysqueezecenter.player.Player.is_connected" title="Permalink to this definition">¶</a></dt>
+<dd>Player Connected?</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.is_player">
+<tt class="descname">is_player</tt><a class="headerlink" href="#pysqueezecenter.player.Player.is_player" title="Permalink to this definition">¶</a></dt>
+<dd>Real Player?</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.mode">
+<tt class="descname">mode</tt><a class="headerlink" href="#pysqueezecenter.player.Player.mode" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Mode</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.model">
+<tt class="descname">model</tt><a class="headerlink" href="#pysqueezecenter.player.Player.model" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Model String</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.mute">
+<tt class="descname">mute</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.mute" title="Permalink to this definition">¶</a></dt>
+<dd>Mute Player</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.muting">
+<tt class="descname">muting</tt><a class="headerlink" href="#pysqueezecenter.player.Player.muting" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Muting Status</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.name">
+<tt class="descname">name</tt><a class="headerlink" href="#pysqueezecenter.player.Player.name" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Name</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.next">
+<tt class="descname">next</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.next" title="Permalink to this definition">¶</a></dt>
+<dd>Next Track</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.pause">
+<tt class="descname">pause</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.pause" title="Permalink to this definition">¶</a></dt>
+<dd>Pause On</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.pitch">
+<tt class="descname">pitch</tt><a class="headerlink" href="#pysqueezecenter.player.Player.pitch" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Pitch</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.pitch_down">
+<tt class="descname">pitch_down</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.pitch_down" title="Permalink to this definition">¶</a></dt>
+<dd>Decrease Player Pitch</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.pitch_up">
+<tt class="descname">pitch_up</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.pitch_up" title="Permalink to this definition">¶</a></dt>
+<dd>Increase Player Pitch</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.play">
+<tt class="descname">play</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.play" title="Permalink to this definition">¶</a></dt>
+<dd>Play</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_delete">
+<tt class="descname">playlist_delete</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_delete" title="Permalink to this definition">¶</a></dt>
+<dd>Delete Item From Playlist By Name</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_erase">
+<tt class="descname">playlist_erase</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_erase" title="Permalink to this definition">¶</a></dt>
+<dd>Erase Item From Playlist</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_insert">
+<tt class="descname">playlist_insert</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_insert" title="Permalink to this definition">¶</a></dt>
+<dd>Insert Item Into Playlist (After Current Track)</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_move">
+<tt class="descname">playlist_move</tt><big>(</big><em>from_index</em>, <em>to_index</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_move" title="Permalink to this definition">¶</a></dt>
+<dd>Move Item In Playlist</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_play">
+<tt class="descname">playlist_play</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_play" title="Permalink to this definition">¶</a></dt>
+<dd>Add Item To Playlist</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.power_state">
+<tt class="descname">power_state</tt><a class="headerlink" href="#pysqueezecenter.player.Player.power_state" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Power State</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.prev">
+<tt class="descname">prev</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.prev" title="Permalink to this definition">¶</a></dt>
+<dd>Previous Track</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.rate">
+<tt class="descname">rate</tt><a class="headerlink" href="#pysqueezecenter.player.Player.rate" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Rate</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.rate_down">
+<tt class="descname">rate_down</tt><big>(</big><em>amount=1</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.rate_down" title="Permalink to this definition">¶</a></dt>
+<dd>Decrease Player Rate</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.rate_up">
+<tt class="descname">rate_up</tt><big>(</big><em>amount=1</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.rate_up" title="Permalink to this definition">¶</a></dt>
+<dd>Increase Player Rate</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.rewind">
+<tt class="descname">rewind</tt><big>(</big><em>seconds=10</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.rewind" title="Permalink to this definition">¶</a></dt>
+<dd>Seek Player Backwards</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.seek_to">
+<tt class="descname">seek_to</tt><big>(</big><em>seconds</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.seek_to" title="Permalink to this definition">¶</a></dt>
+<dd>Seek Player</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_bass">
+<tt class="descname">set_bass</tt><big>(</big><em>bass</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_bass" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Bass</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_ir_state">
+<tt class="descname">set_ir_state</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_ir_state" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Power State</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_muting">
+<tt class="descname">set_muting</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_muting" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Muting Status</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_name">
+<tt class="descname">set_name</tt><big>(</big><em>name</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_name" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Name</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_pitch">
+<tt class="descname">set_pitch</tt><big>(</big><em>pitch</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_pitch" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Pitch</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_power_state">
+<tt class="descname">set_power_state</tt><big>(</big><em>state</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_power_state" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Power State</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_pref_value">
+<tt class="descname">set_pref_value</tt><big>(</big><em>name</em>, <em>value</em>, <em>namespace=None</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_pref_value" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Preference Value</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_rate">
+<tt class="descname">set_rate</tt><big>(</big><em>rate</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_rate" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Rate</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_treble">
+<tt class="descname">set_treble</tt><big>(</big><em>treble</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_treble" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Treble</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.set_volume">
+<tt class="descname">set_volume</tt><big>(</big><em>volume</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.set_volume" title="Permalink to this definition">¶</a></dt>
+<dd>Set Player Volume</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.show">
+<tt class="descname">show</tt><big>(</big><em>line1=''</em>, <em>line2=''</em>, <em>duration=3</em>, <em>brightness=4</em>, <em>font='standard'</em>, <em>centered=False</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.show" title="Permalink to this definition">¶</a></dt>
+<dd>Displays text on Player display</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.stop">
+<tt class="descname">stop</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.stop" title="Permalink to this definition">¶</a></dt>
+<dd>Stop</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.time_elapsed">
+<tt class="descname">time_elapsed</tt><a class="headerlink" href="#pysqueezecenter.player.Player.time_elapsed" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Time Elapsed</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.time_remaining">
+<tt class="descname">time_remaining</tt><a class="headerlink" href="#pysqueezecenter.player.Player.time_remaining" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Time Remaining</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.toggle">
+<tt class="descname">toggle</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.toggle" title="Permalink to this definition">¶</a></dt>
+<dd>Play/Pause Toggle</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.track_artist">
+<tt class="descname">track_artist</tt><a class="headerlink" href="#pysqueezecenter.player.Player.track_artist" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Artist</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.track_current_title">
+<tt class="descname">track_current_title</tt><a class="headerlink" href="#pysqueezecenter.player.Player.track_current_title" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Current Title</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.track_duration">
+<tt class="descname">track_duration</tt><a class="headerlink" href="#pysqueezecenter.player.Player.track_duration" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Duration</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.track_genre">
+<tt class="descname">track_genre</tt><a class="headerlink" href="#pysqueezecenter.player.Player.track_genre" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Genre</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.track_path">
+<tt class="descname">track_path</tt><a class="headerlink" href="#pysqueezecenter.player.Player.track_path" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Path</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.track_remote">
+<tt class="descname">track_remote</tt><a class="headerlink" href="#pysqueezecenter.player.Player.track_remote" title="Permalink to this definition">¶</a></dt>
+<dd>Is Players Current Track Remotely Hosted?</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.track_title">
+<tt class="descname">track_title</tt><a class="headerlink" href="#pysqueezecenter.player.Player.track_title" title="Permalink to this definition">¶</a></dt>
+<dd>Get Players Current Track Title</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.treble">
+<tt class="descname">treble</tt><a class="headerlink" href="#pysqueezecenter.player.Player.treble" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Treble</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.treble_down">
+<tt class="descname">treble_down</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.treble_down" title="Permalink to this definition">¶</a></dt>
+<dd>Decrease Player Treble</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.treble_up">
+<tt class="descname">treble_up</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.treble_up" title="Permalink to this definition">¶</a></dt>
+<dd>Increase Player Treble</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.unmute">
+<tt class="descname">unmute</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.unmute" title="Permalink to this definition">¶</a></dt>
+<dd>Unmute Player</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.unpause">
+<tt class="descname">unpause</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.unpause" title="Permalink to this definition">¶</a></dt>
+<dd>Pause Off</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.uuid">
+<tt class="descname">uuid</tt><a class="headerlink" href="#pysqueezecenter.player.Player.uuid" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player UUID</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.volume">
+<tt class="descname">volume</tt><a class="headerlink" href="#pysqueezecenter.player.Player.volume" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player Volume</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.volume_down">
+<tt class="descname">volume_down</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.volume_down" title="Permalink to this definition">¶</a></dt>
+<dd>Decrease Player Volume</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.volume_up">
+<tt class="descname">volume_up</tt><big>(</big><em>amount=5</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.volume_up" title="Permalink to this definition">¶</a></dt>
+<dd>Increase Player Volume</dd></dl>
+
+<dl class="attribute">
+<dt id="pysqueezecenter.player.Player.wifi_signal_strength">
+<tt class="descname">wifi_signal_strength</tt><a class="headerlink" href="#pysqueezecenter.player.Player.wifi_signal_strength" title="Permalink to this definition">¶</a></dt>
+<dd>Get Player WiFi Signal Strength</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="server.html"
+                                  title="previous chapter"><tt class="docutils literal docutils literal"><span class="pre">pysqueezecenter.server.Server</span></tt></a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/player.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="server.html" title="pysqueezecenter.server.Server"
+             >previous</a> |</li>
+        <li><a href="index.html">PySqueezeCenter v0.1 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2009, Louis King.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+    </div>
+  </body>
+</html>

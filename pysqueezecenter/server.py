@@ -22,9 +22,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 import sys
 import telnetlib
 import urllib
-from SqueezePlayer import SqueezePlayer
+from player import Player
 
-class SqueezeCenter:
+class Server:
     
         def __init__(self, hostname="localhost", port=9090, username="", password=""):
             """
@@ -68,7 +68,7 @@ class SqueezeCenter:
             self.players = []
             player_count = self.get_player_count()
             for i in range(player_count):
-                player = SqueezePlayer(self, i-1)
+                player = Player(self, i-1)
                 self.players.append(player)
             return self.players
 
