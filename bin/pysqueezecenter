@@ -67,6 +67,9 @@ if options.device and not player:
     logger.error("Cannot find player %s" % (options.device));
     sys.exit(1)
 
+if not args:
+    sys.exit(0)
+
 cmd = args[0].lower()
 try:
     params = args[1:]
@@ -84,6 +87,6 @@ if player and cmd in VALID_COMMANDS:
     except TypeError:
         logger.error("Incorrect number of parameters")
 else:
-    logger.error("Invalid command: %s" % (cmd))
+    logger.error("Invalid command or no device: %s" % (cmd))
     sys.exit(1)
 
