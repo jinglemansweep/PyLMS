@@ -5,7 +5,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Class (pysqueezecenter.player.Server) &mdash; PySqueezeCenter v0.6 documentation</title>
+    <title>Command Line Utility &mdash; PySqueezeCenter v0.6 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -20,8 +20,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="PySqueezeCenter v0.6 documentation" href="index.html" />
-    <link rel="next" title="Player Class (pysqueezecenter.player.Player)" href="player.html" />
-    <link rel="prev" title="PySqueezeCenter Documentation" href="index.html" /> 
+    <link rel="prev" title="Player Class (pysqueezecenter.player.Player)" href="player.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,9 +31,6 @@
              accesskey="I">index</a></li>
         <li class="right" >
           <a href="player.html" title="Player Class (pysqueezecenter.player.Player)"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="PySqueezeCenter Documentation"
              accesskey="P">previous</a> |</li>
         <li><a href="index.html">PySqueezeCenter v0.6 documentation</a> &raquo;</li> 
       </ul>
@@ -45,42 +41,28 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="server-class-pysqueezecenter-player-server">
-<h1>Server Class (pysqueezecenter.player.Server)<a class="headerlink" href="#server-class-pysqueezecenter-player-server" title="Permalink to this headline">¶</a></h1>
-<p>The Server class deals with the SqueezeCenter server and provides the main
-communication functions between the PySqueezeCenter API and the SqueezeCenter&#8217;s
-Telnet server.</p>
-<dl class="class">
-<dt id="pysqueezecenter.server.Server">
-<em class="property">
-class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="descname">Server</tt><big>(</big><em>hostname='localhost'</em>, <em>port=9090</em>, <em>username=''</em>, <em>password=''</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="pysqueezecenter.server.Server.connect">
-<tt class="descname">connect</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.connect" title="Permalink to this definition">¶</a></dt>
-<dd>Connect</dd></dl>
+  <div class="section" id="command-line-utility">
+<h1>Command Line Utility<a class="headerlink" href="#command-line-utility" title="Permalink to this headline">¶</a></h1>
+<p>Help:</p>
+<div class="highlight-python"><pre>Usage: pysqueezecenter or type pysqueezecenter -h (--help) for help
 
-<dl class="method">
-<dt id="pysqueezecenter.server.Server.get_player">
-<tt class="descname">get_player</tt><big>(</big><em>id=None</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.get_player" title="Permalink to this definition">¶</a></dt>
-<dd>Get Player</dd></dl>
-
-<dl class="method">
-<dt id="pysqueezecenter.server.Server.get_player_count">
-<tt class="descname">get_player_count</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.get_player_count" title="Permalink to this definition">¶</a></dt>
-<dd>Get Number Of Players</dd></dl>
-
-<dl class="method">
-<dt id="pysqueezecenter.server.Server.get_players">
-<tt class="descname">get_players</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.get_players" title="Permalink to this definition">¶</a></dt>
-<dd>Get Players</dd></dl>
-
-<dl class="method">
-<dt id="pysqueezecenter.server.Server.get_version">
-<tt class="descname">get_version</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.get_version" title="Permalink to this definition">¶</a></dt>
-<dd>Get Version</dd></dl>
-
-</dd></dl>
-
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -v                    Verbosity. Add more -v to be more verbose
+                        (4=DEBUG,3=INFO,2=WARNING,1=ERROR,0=CRITICAL)
+                        [default: 3]
+  -l LOGFILE, --logfile=LOGFILE
+                        Log to file instead of console
+  -s HOST, --host=HOST  Specify Hostname of SqueezeCenter [default: localhost]
+  -n PORT, --port=PORT  Specify Port of SqueezeCenter [default: 9090]
+  -u USERNAME, --username=USERNAME
+                        Specify Authorisation Username
+  -p PASSWORD, --password=PASSWORD
+                        Specify Authorisation Password
+  -d DEVICE, --device=DEVICE
+                        Specify SqueezePlayer Device MAC Address</pre>
+</div>
 </div>
 
 
@@ -90,14 +72,11 @@ class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="desc
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
             <h4>Previous topic</h4>
-            <p class="topless"><a href="index.html"
-                                  title="previous chapter">PySqueezeCenter Documentation</a></p>
-            <h4>Next topic</h4>
             <p class="topless"><a href="player.html"
-                                  title="next chapter">Player Class (pysqueezecenter.player.Player)</a></p>
+                                  title="previous chapter">Player Class (pysqueezecenter.player.Player)</a></p>
             <h3>This Page</h3>
             <ul class="this-page-menu">
-              <li><a href="_sources/server.txt"
+              <li><a href="_sources/cli.txt"
                      rel="nofollow">Show Source</a></li>
             </ul>
           <div id="searchbox" style="display: none">
@@ -125,9 +104,6 @@ class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="desc
              >index</a></li>
         <li class="right" >
           <a href="player.html" title="Player Class (pysqueezecenter.player.Player)"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="index.html" title="PySqueezeCenter Documentation"
              >previous</a> |</li>
         <li><a href="index.html">PySqueezeCenter v0.6 documentation</a> &raquo;</li> 
       </ul>

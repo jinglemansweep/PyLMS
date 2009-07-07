@@ -19,7 +19,7 @@ DEFAULT_VERBOSITY = 3
 
 VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev"
                   "volume_up", "volume_down", "mute", "unmute", "seek_to",
-                  "forward", "rewind", "set_power_state",]
+                  "forward", "rewind", "set_power_state", "set_volume",]
 
 # Option Parsing
 
@@ -59,7 +59,7 @@ except:
 logger.info("SqueezeCenter Version: %s" % (sc.get_version()))
 
 for p in sc.get_players():
-    logger.info("Player:%s|%s|M:%s|T:%s|C:%s|W:%s" % (p.id, p.name, p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
+    logger.info("Player:%s|%s|V:%i|M:%s|T:%s|C:%s|W:%s" % (p.id, p.name, p.get_volume(), p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
 
 player = sc.get_player(options.device)
 
