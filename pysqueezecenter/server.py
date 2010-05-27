@@ -2,7 +2,7 @@
 
 """
 PySqueezeCenter: Python Wrapper for Logitech SqueezeCenter CLI (Telnet) Interface
-Copyright (C) 2008 JingleManSweep <jinglemansweep [at] gmail [dot] com>
+Copyright (C) 2010 JingleManSweep <jinglemansweep [at] gmail [dot] com>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -78,7 +78,7 @@ class Server:
             """
             if id:
                 for player in self.players:
-                    if str(player.id) == str(id).lower():
+                    if str(player.id) == str(id).lower() or str(player.name)==str(id):
                         return player
 
         def get_version(self):

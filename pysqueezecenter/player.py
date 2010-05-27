@@ -2,7 +2,7 @@
 
 """
 PySqueezeCenter: Python Wrapper for Logitech SqueezeCenter CLI (Telnet) Interface
-Copyright (C) 2008 JingleManSweep <jinglemansweep [at] gmail [dot] com>
+Copyright (C) 2010 JingleManSweep <jinglemansweep [at] gmail [dot] com>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -165,7 +165,10 @@ class Player:
     
     def get_time_elapsed(self):
         """Get Player Time Elapsed"""
-        self.time = float(self._request("time ?"))
+        try:
+            self.time = float(self._request("time ?"))
+        except:
+            self.time = float(0)
         return self.time
     
     def get_time_remaining(self):
@@ -200,7 +203,10 @@ class Player:
                
     def get_volume(self):
         """Get Player Volume"""
-        self.volume = int(self._request("mixer volume ?"))
+        try:
+            self.volume = int(self._request("mixer volume ?"))
+        except:
+            self.volume = -1
         return self.volume           
 
     def get_bass(self):

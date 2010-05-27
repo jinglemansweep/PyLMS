@@ -68,6 +68,7 @@ if options.device and not player:
     sys.exit(1)
 
 if not args:
+    logger.warn("No arguments provided")
     sys.exit(0)
 
 cmd = args[0].lower()
@@ -76,17 +77,21 @@ try:
 except IndexError:
     params = []
 
-if player and cmd in VALID_COMMANDS:
-    logger.debug("Command %s | Param: %s" % (cmd, params))
-    func = getattr(player, cmd, None)
-    try:
-        func(*params)
-    except ValueError:
-        logger.error("Invalid parameter")
+if player is not None:
+    if cmd in VALID_COMMANDS:
+        logger.debug("Command %s | Param: %s" % (cmd, params))
+        func = getattr(player, cmd, None)
+        try:
+            func(*params)
+            logger.info("Done")
+            sys.exit(0)
+        except ValueError:
+            logger.error("Invalid parameter")
+            sys.exit(1)
+        except TypeError:
+            logger.error("Incorrect number of parameters")
+            sys.exit(1)
+    else:
+        logger.error("Invalid command or no device: %s" % (cmd))
         sys.exit(1)
-    except TypeError:
-        logger.error("Incorrect number of parameters")
-else:
-    logger.error("Invalid command or no device: %s" % (cmd))
-    sys.exit(1)
 
