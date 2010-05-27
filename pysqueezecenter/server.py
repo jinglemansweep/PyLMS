@@ -40,6 +40,7 @@ class Server(object):
         Constructor
         """
         self.debug = False
+        self.logger = None
         self.telnet = None
         self.logged_in = False
         self.hostname = hostname
@@ -67,6 +68,7 @@ class Server(object):
         """
         Request
         """
+        # self.logger.debug("Telnet: %s" % (command_string))
         self.telnet.write(command_string + "\n")
         response = urllib.unquote(self.telnet.read_until("\n"))
         result = response[len(command_string)-1:-1]
@@ -89,8 +91,8 @@ class Server(object):
         """
         if ref:
             for player in self.players:
-                if str(player.ref) == str(ref).lower() \
-                or str(player.name)==str(ref):
+                if str(player.ref).lower() == str(ref).lower() \
+                or str(player.name).lower() == str(ref).lower():
                     return player
 
     def get_version(self):

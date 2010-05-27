@@ -36,6 +36,7 @@ class Player(object):
         Constructor
         """
         self.server = server
+        self.logger = None
         self.index = None
         self.ref = None
         self.uuid = None
@@ -380,19 +381,27 @@ class Player(object):
     
     def set_volume(self, volume):
         """Set Player Volume"""
-        if volume < 0: 
-            volume = 0
-        if volume > 100: 
-            volume = 100
-        self.request("mixer volume %i" % (volume))
+        try:
+            volume = int(volume)            
+            if volume < 0: 
+                volume = 0
+            if volume > 100: 
+                volume = 100
+            self.request("mixer volume %i" % (volume))
+        except TypeError:
+            pass
 
     def set_bass(self, bass):
         """Set Player Bass"""
-        if bass < -100: 
-            bass = -100
-        if bass > 100: 
-            bass = 100
-        self.request("mixer bass %i" % (bass))
+        try:
+            bass = int(bass)
+            if bass < -100: 
+                bass = -100
+            if bass > 100: 
+                bass = 100
+            self.request("mixer bass %i" % (bass))
+        except TypeError:
+            pass
 
     def bass_up(self, amount=5):
         """Increase Player Bass"""
@@ -401,72 +410,120 @@ class Player(object):
 
     def bass_down(self, amount=5):
         """Decrease Player Bass"""
-        self.request("mixer bass -%i" % (amount))
-        self.get_bass()
+        try:
+            amount = int(amount)            
+            self.request("mixer bass -%i" % (amount))
+            self.get_bass()
+        except TypeError:
+            pass
 
     def set_treble(self, treble):
         """Set Player Treble"""
-        if treble < -100:
-            treble = -100
-        if treble > 100:
-            treble = 100
-        self.request("mixer treble %i" % (treble))
+        try:
+            treble = int(treble)       
+            if treble < -100:
+                treble = -100
+            if treble > 100:
+                treble = 100
+            self.request("mixer treble %i" % (treble))
+        except TypeError:
+            pass
 
     def treble_up(self, amount=5):
         """Increase Player Treble"""
-        self.request("mixer treble +%i" % (amount))
-        self.get_treble()
+        try:
+            amount = int(amount)
+            self.request("mixer treble +%i" % (amount))
+            self.get_treble()
+        except TypeError:
+            pass
 
     def treble_down(self, amount=5):
         """Decrease Player Treble"""
-        self.request("mixer treble -%i" % (amount))
-        self.get_treble()
+        try:
+            amount = int(amount)
+            self.request("mixer treble -%i" % (amount))
+            self.get_treble()
+        except TypeError:
+            pass
 
     def set_pitch(self, pitch):
         """Set Player Pitch"""
-        if pitch < 80: 
-            pitch = 80
-        if pitch > 120: 
-            pitch = 120
-        self.request("mixer pitch %i" % (pitch))
+        try:
+            pitch = int(pitch)
+            if pitch < 80: 
+                pitch = 80
+            if pitch > 120: 
+                pitch = 120
+            self.request("mixer pitch %i" % (pitch))
+        except TypeError:
+            pass
 
     def pitch_up(self, amount=5):
         """Increase Player Pitch"""
-        self.request("mixer pitch +%i" % (amount))
-        self.get_pitch()
+        try:
+            amount = int(amount)        
+            self.request("mixer pitch +%i" % (amount))
+            self.get_pitch()
+        except TypeError:
+            pass
 
     def pitch_down(self, amount=5):
         """Decrease Player Pitch"""
-        self.request("mixer pitch -%i" % (amount))
-        self.get_pitch()
+        try:
+            amount = int(amount)  
+            self.request("mixer pitch -%i" % (amount))
+            self.get_pitch()
+        except TypeError:
+            pass
 
     def set_rate(self, rate):
         """Set Player Rate"""
-        if rate < -4: 
-            rate = 4
-        if rate > 4: 
-            rate = 4
-        self.request("mixer rate %i" % (rate))
+        try:
+            rate = int(rate)
+            if rate < -4: 
+                rate = 4
+            if rate > 4: 
+                rate = 4
+            self.request("mixer rate %i" % (rate))
+        except TypeError:
+            pass
 
     def rate_up(self, amount=1):
         """Increase Player Rate"""
-        self.request("mixer rate +%i" % (amount))
-        self.get_rate()
+        try:
+            amount = int(amount)
+            self.request("mixer rate +%i" % (amount))
+            self.get_rate()
+        except TypeError:
+            pass
 
     def rate_down(self, amount=1):
         """Decrease Player Rate"""
-        self.request("mixer rate -%i" % (amount))
-        self.get_rate()
+        try:
+            amount = int(amount)
+            self.request("mixer rate -%i" % (amount))
+            self.get_rate()
+        except TypeError:
+            pass
 
     def volume_up(self, amount=5):
         """Increase Player Volume"""
-        self.request("mixer volume +%i" % (amount))
-        self.get_volume()
+        try:
+            amount = int(amount)
+            self.request("mixer volume +%i" % (amount))
+            self.get_volume()
+        except TypeError:
+            pass
 
     def volume_down(self, amount=5):
         """Decrease Player Volume"""
-        self.request("mixer volume -%i" % (amount))
-        self.get_volume()
+        try:
+            amount = int(amount)            
+            self.request("mixer volume -%i" % (amount))
+            self.get_volume()
+        except TypeError:
+            pass
     
     def mute(self):
         """Mute Player"""
@@ -478,15 +535,27 @@ class Player(object):
     
     def seek_to(self, seconds):
         """Seek Player"""
-        self.request("time %s" % (seconds))
+        try:
+            seconds = int(seconds)
+            self.request("time %s" % (seconds))
+        except TypeError:
+            pass
         
     def forward(self, seconds=10):
         """Seek Player Forward"""
-        self.request("time +%s" % (seconds))        
+        try:
+            seconds = int(seconds)
+            self.request("time +%s" % (seconds))        
+        except TypeError:
+            pass
 
     def rewind(self, seconds=10):
         """Seek Player Backwards"""
-        self.request("time -%s" % (seconds))   
+        try:
+            seconds = int(seconds)
+            self.request("time -%s" % (seconds))   
+        except TypeError:
+            pass
 
     def ir_button(self, button):
         """Simulate IR Button Press"""

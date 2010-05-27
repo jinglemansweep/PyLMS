@@ -1,6 +1,6 @@
 # Sphinx inventory version 1
 # Project: PySqueezeCenter
-# Version: 0.9
+# Version: 0.91
 pysqueezecenter.player.Player.get_track_album method player.html
 pysqueezecenter.player.Player.set_pitch method player.html
 pysqueezecenter.player.Player.playlist_move method player.html

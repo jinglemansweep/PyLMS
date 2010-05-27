@@ -16,7 +16,7 @@ LOG_HELP = ','.join(["%d=%s" % (4-x, logging.getLevelName((x+1)*10)) for x in xr
 LOG_FORMAT_CONS = '%(levelname)s: %(message)s'
 LOG_FORMAT_FILE = '%(asctime)s %(name)s[%(process)d] %(levelname)10s %(message)s'
 LOGLEVEL_DICT = { 1 : 50, 2:40, 3:20, 4:10, 5:1 }
-DEFAULT_VERBOSITY = 2
+DEFAULT_VERBOSITY = 3
 
 VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev"
                   "volume_up", "volume_down", "mute", "unmute", "seek_to",
@@ -33,6 +33,7 @@ parser.add_option("-n", "--port", dest="port", default="9090", help="Specify Por
 parser.add_option("-u", "--username", dest="username", default=None, help="Specify Authorisation Username")
 parser.add_option("-p", "--password", dest="password", default=None, help="Specify Authorisation Password")
 parser.add_option("-d", "--device", dest="device", default=None, help="Specify SqueezePlayer Device MAC Address")
+parser.add_option("-i", "--info", dest="info", action="store_true", default=False, help="Show Server/Player Information")
 
 (options, args) = parser.parse_args()
 
@@ -50,6 +51,7 @@ else:
 # Main
 
 sc = Server(hostname=options.host, port=options.port, username=options.username, password=options.password)
+sc.logger = logger
 
 try:
     sc.connect()
@@ -57,18 +59,20 @@ except:
     logger.error("Cannot connect to SqueezeCenter (%s:%s)" % (options.host, options.port))
     sys.exit(1)
 
-logger.info("SqueezeCenter Version: %s" % (sc.get_version()))
+all_players = sc.players
 
-for p in sc.get_players():
-    logger.info("Player:%s|%s|V:%i|M:%s|T:%s|C:%s|W:%s" % (p.ref, p.name, p.get_volume(), p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
+if options.info:
+    logger.info("SqueezeCenter Version: %s" % (sc.get_version()))
+    for p in all_players:
+        logger.info("Player: %s | %s | V: %i | M: %s | T: %s | C: %s | W: %s" % (p.ref, p.name, p.get_volume(), p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
 
 players = []
 if options.device=='all':
-    players = sc.get_players()
+    players = list(all_players)
 else:
-    player = sc.get_player(options.device)
-    if player:
-        players.append(player)
+    sel_player = sc.get_player(options.device)
+    if sel_player:
+        players.append(sel_player)
 
 if options.device and len(players)==0:
     logger.error("Cannot find player %s" % (options.device))
@@ -84,22 +88,18 @@ try:
 except IndexError:
     params = []
 
+
 for player in players:
     if player is not None:
         if cmd in VALID_COMMANDS:
-            logger.debug("Command %s | Param: %s" % (cmd, params))
             func = getattr(player, cmd, None)
             try:
-                func(*params)
-                logger.info("Done")
-                sys.exit(0)
+                logger.debug("%s: %s [%s]" % (player.name, cmd.upper(), ", ".join(params)))
+                func(*params)            
             except ValueError:
                 logger.error("Invalid parameter")
-                sys.exit(1)
             except TypeError:
                 logger.error("Incorrect number of parameters or invalid type parameter")
-                sys.exit(1)
         else:
             logger.error("Invalid command or no device: %s" % (cmd))
-            sys.exit(1)
 
