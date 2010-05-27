@@ -8,7 +8,7 @@ from setuptools import setup, find_packages
 
 setup(
 	name="pysqueezecenter",
-	version="0.8",
+	version="0.9",
 	description="PySqueezeCenter",
 	author="Louis King",
 	author_email="jinglemansweep@gmail.com",
@@ -22,7 +22,7 @@ setup(
 		"Development Status :: 2 - Pre-Alpha",
 		"Environment :: Console",
 		"Intended Audience :: Developers",
-        "Intended Audience :: End Users/Desktop",
+	        "Intended Audience :: End Users/Desktop",
 		"License :: OSI Approved :: GNU General Public License (GPL)",
 		"Natural Language :: English",
 		"Operating System :: POSIX :: Linux",

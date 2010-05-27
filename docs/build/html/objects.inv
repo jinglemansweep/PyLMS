@@ -1,10 +1,10 @@
 # Sphinx inventory version 1
 # Project: PySqueezeCenter
-# Version: 0.8
+# Version: 0.9
 pysqueezecenter.player.Player.get_track_album method player.html
 pysqueezecenter.player.Player.set_pitch method player.html
 pysqueezecenter.player.Player.playlist_move method player.html
-pysqueezecenter.server.Server.connect method server.html
+pysqueezecenter.player.Player.get_rate method player.html
 pysqueezecenter.player.Player.get_uuid method player.html
 pysqueezecenter.player.Player.pitch_down method player.html
 pysqueezecenter.player.Player.treble_down method player.html
@@ -43,6 +43,7 @@ pysqueezecenter.player.Player.pause method player.html
 pysqueezecenter.player.Player.stop method player.html
 pysqueezecenter.player.Player.update method player.html
 pysqueezecenter.player.Player.pitch_up method player.html
+pysqueezecenter.player.Player.display method player.html
 pysqueezecenter.player.Player.mute method player.html
 pysqueezecenter.player.Player.get_ip_address method player.html
 pysqueezecenter.player.Player.set_name method player.html
@@ -71,7 +72,7 @@ pysqueezecenter.player.Player.set_muting method player.html
 pysqueezecenter.player.Player.set_volume method player.html
 pysqueezecenter.player.Player.get_pref_value method player.html
 pysqueezecenter.player.Player.forward method player.html
-pysqueezecenter.player.Player.get_rate method player.html
+pysqueezecenter.server.Server.connect method server.html
 pysqueezecenter.player.Player.play method player.html
 pysqueezecenter.player.Player.playlist_add method player.html
 pysqueezecenter.player.Player.playlist_insert method player.html
