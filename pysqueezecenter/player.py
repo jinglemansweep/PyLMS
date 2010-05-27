@@ -337,10 +337,18 @@ class Player(object):
         if font == "huge":
             line1 = ""
         line1, line2 = urllib.quote(line1), urllib.quote(line2)
-        req_string = "show line1:%s line2:%s duration:%i "
-        req_string += "brightness:%i font:%s centered:%i"
+        req_string = "show line1:%s line2:%s duration:%s "
+        req_string += "brightness:%s font:%s centered:%i"
         self.request(req_string % 
-                     (line1, line2, duration, brightness, font, int(centered)))
+                     (line1, line2, str(duration), str(brightness), font, int(centered)))
+
+    def display(self, line1="",
+                      line2="",
+                      duration=3):
+        line1, line2 = urllib.quote(line1), urllib.quote(line2)
+        req_string = "display line1:%s line2:%s duration:%s "
+        self.request(req_string % 
+                     (line1, line2, str(duration))
 
     def play(self):
         """Play"""

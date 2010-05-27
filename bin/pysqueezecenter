@@ -16,11 +16,11 @@ LOG_HELP = ','.join(["%d=%s" % (4-x, logging.getLevelName((x+1)*10)) for x in xr
 LOG_FORMAT_CONS = '%(levelname)s: %(message)s'
 LOG_FORMAT_FILE = '%(asctime)s %(name)s[%(process)d] %(levelname)10s %(message)s'
 LOGLEVEL_DICT = { 1 : 50, 2:40, 3:20, 4:10, 5:1 }
-DEFAULT_VERBOSITY = 3
+DEFAULT_VERBOSITY = 2
 
 VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev"
                   "volume_up", "volume_down", "mute", "unmute", "seek_to",
-                  "forward", "rewind", "set_power_state", "set_volume",]
+                  "forward", "rewind", "set_power_state", "set_volume", "show", "display", "infos"]
 
 # Option Parsing
 
@@ -62,9 +62,15 @@ logger.info("SqueezeCenter Version: %s" % (sc.get_version()))
 for p in sc.get_players():
     logger.info("Player:%s|%s|V:%i|M:%s|T:%s|C:%s|W:%s" % (p.ref, p.name, p.get_volume(), p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
 
-player = sc.get_player(options.device)
+players = []
+if options.device=='all':
+    players = sc.get_players()
+else:
+    player = sc.get_player(options.device)
+    if player:
+        players.append(player)
 
-if options.device and not player:
+if options.device and len(players)==0:
     logger.error("Cannot find player %s" % (options.device))
     sys.exit(1)
 
@@ -78,21 +84,22 @@ try:
 except IndexError:
     params = []
 
-if player is not None:
-    if cmd in VALID_COMMANDS:
-        logger.debug("Command %s | Param: %s" % (cmd, params))
-        func = getattr(player, cmd, None)
-        try:
-            func(*params)
-            logger.info("Done")
-            sys.exit(0)
-        except ValueError:
-            logger.error("Invalid parameter")
+for player in players:
+    if player is not None:
+        if cmd in VALID_COMMANDS:
+            logger.debug("Command %s | Param: %s" % (cmd, params))
+            func = getattr(player, cmd, None)
+            try:
+                func(*params)
+                logger.info("Done")
+                sys.exit(0)
+            except ValueError:
+                logger.error("Invalid parameter")
+                sys.exit(1)
+            except TypeError:
+                logger.error("Incorrect number of parameters or invalid type parameter")
+                sys.exit(1)
+        else:
+            logger.error("Invalid command or no device: %s" % (cmd))
             sys.exit(1)
-        except TypeError:
-            logger.error("Incorrect number of parameters")
-            sys.exit(1)
-    else:
-        logger.error("Invalid command or no device: %s" % (cmd))
-        sys.exit(1)
 
