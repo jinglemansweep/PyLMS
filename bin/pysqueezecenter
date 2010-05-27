@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 
+""" PySqueezeCenter Command Line Tool """
+
 __revision__ = "$Id$"
 __docformat__ = 'restructuredtext en'
 
 import os, sys, logging, optparse
 
 from pysqueezecenter.server import Server
-from pysqueezecenter.player import Player
 
 # Globals
 
@@ -59,12 +60,12 @@ except:
 logger.info("SqueezeCenter Version: %s" % (sc.get_version()))
 
 for p in sc.get_players():
-    logger.info("Player:%s|%s|V:%i|M:%s|T:%s|C:%s|W:%s" % (p.id, p.name, p.get_volume(), p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
+    logger.info("Player:%s|%s|V:%i|M:%s|T:%s|C:%s|W:%s" % (p.ref, p.name, p.get_volume(), p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
 
 player = sc.get_player(options.device)
 
 if options.device and not player:
-    logger.error("Cannot find player %s" % (options.device));
+    logger.error("Cannot find player %s" % (options.device))
     sys.exit(1)
 
 if not args:

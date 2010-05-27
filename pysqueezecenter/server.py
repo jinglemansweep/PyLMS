@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 """
-PySqueezeCenter: Python Wrapper for Logitech SqueezeCenter CLI (Telnet) Interface
+PySqueezeCenter: Python Wrapper for Logitech SqueezeCenter CLI
+(Telnet) Interface
+
 Copyright (C) 2010 JingleManSweep <jinglemansweep [at] gmail [dot] com>
 
 This program is free software; you can redistribute it and/or
@@ -19,88 +21,98 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-import sys
 import telnetlib
 import urllib
-from player import Player
+from pysqueezecenter.player import Player
 
-class Server:
+class Server(object):
+
+    """
+    SqueezeCenter Server
+    """
+
+    def __init__(self, hostname="localhost",
+                       port=9090, 
+                       username="", 
+                       password=""):
+                       
+        """
+        Constructor
+        """
+        self.debug = False
+        self.telnet = None
+        self.logged_in = False
+        self.hostname = hostname
+        self.port = port
+        self.username = username
+        self.password = password
+        self.version = ""
+        self.player_count = 0
+        self.players = []
+        
+    def telnet_connect(self):
+        """
+        Telnet Connect
+        """
+        self.telnet = telnetlib.Telnet(self.hostname, self.port)
     
-        def __init__(self, hostname="localhost", port=9090, username="", password=""):
-            """
-            Constructor
-            """
-            self.debug = False
-            self.hostname = hostname
-            self.port = port
-            self.username = username
-            self.password = password
-            self.version = ""
-            self.player_count = 0
-            self.players = []
-            
-        def _connect(self):
-            """
-            Connect
-            """
-            self.tn = telnetlib.Telnet(self.hostname, self.port)
+    def login(self):
+        """
+        Login
+        """
+        result = self.request("login %s %s" % (self.username, self.password))
+        self.logged_in = (result == "******")
         
-        def _login(self):
-            """
-            Login
-            """
-            result = self._request("login %s %s" % (self.username, self.password))
-            self.logged_in = (result == "******")
-            
-        def _request(self, command_string):
-            """
-            Request
-            """
-            self.tn.write(command_string + "\n")
-            response = urllib.unquote(self.tn.read_until("\n"))
-            result = response[len(command_string)-1:-1]
-            return result
+    def request(self, command_string):
+        """
+        Request
+        """
+        self.telnet.write(command_string + "\n")
+        response = urllib.unquote(self.telnet.read_until("\n"))
+        result = response[len(command_string)-1:-1]
+        return result
 
-        def get_players(self):
-            """
-            Get Players
-            """
-            self.players = []
-            player_count = self.get_player_count()
-            for i in range(player_count):
-                player = Player(self, i-1)
-                self.players.append(player)
-            return self.players
+    def get_players(self):
+        """
+        Get Players
+        """
+        self.players = []
+        player_count = self.get_player_count()
+        for i in range(player_count):
+            player = Player(server=self, index=i-1)
+            self.players.append(player)
+        return self.players
 
-        def get_player(self, id=None):
-            """
-            Get Player
-            """
-            if id:
-                for player in self.players:
-                    if str(player.id) == str(id).lower() or str(player.name)==str(id):
-                        return player
+    def get_player(self, ref=None):
+        """
+        Get Player
+        """
+        if ref:
+            for player in self.players:
+                if str(player.ref) == str(ref).lower() \
+                or str(player.name)==str(ref):
+                    return player
 
-        def get_version(self):
-            """
-            Get Version
-            """
-            self.version = self._request("version ?")
-            return self.version
+    def get_version(self):
+        """
+        Get Version
+        """
+        self.version = self.request("version ?")
+        return self.version
+    
+    def get_player_count(self):
+        """
+        Get Number Of Players
+        """
+        self.player_count = self.request("player count ?")
+        return int(self.player_count)
+    
+    def connect(self):
+        """
+        Connect
+        """
+        self.telnet_connect()
+        self.login()
+        self.get_players()
         
-        def get_player_count(self):
-            """
-            Get Number Of Players
-            """
-            self.player_count = self._request("player count ?")
-            return int(self.player_count)
-        
-        def connect(self):
-            """
-            Connect
-            """
-            self._connect()
-            self._login()
-            self.get_players()
-            
 
