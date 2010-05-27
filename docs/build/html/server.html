@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    '#',
         VERSION:     '0.6',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
@@ -52,16 +52,16 @@ communication functions between the PySqueezeCenter API and the SqueezeCenter&#8
 Telnet server.</p>
 <dl class="class">
 <dt id="pysqueezecenter.server.Server">
-<em class="property">
-class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="descname">Server</tt><big>(</big><em>hostname='localhost'</em>, <em>port=9090</em>, <em>username=''</em>, <em>password=''</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<em class="property">class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="descname">Server</tt><big>(</big><em>hostname='localhost'</em>, <em>port=9090</em>, <em>username=''</em>, <em>password=''</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server" title="Permalink to this definition">¶</a></dt>
+<dd><p>SqueezeCenter Server</p>
+<dl class="method">
 <dt id="pysqueezecenter.server.Server.connect">
 <tt class="descname">connect</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.connect" title="Permalink to this definition">¶</a></dt>
 <dd>Connect</dd></dl>
 
 <dl class="method">
 <dt id="pysqueezecenter.server.Server.get_player">
-<tt class="descname">get_player</tt><big>(</big><em>id=None</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.get_player" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_player</tt><big>(</big><em>ref=None</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.get_player" title="Permalink to this definition">¶</a></dt>
 <dd>Get Player</dd></dl>
 
 <dl class="method">
@@ -78,6 +78,21 @@ class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="desc
 <dt id="pysqueezecenter.server.Server.get_version">
 <tt class="descname">get_version</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.get_version" title="Permalink to this definition">¶</a></dt>
 <dd>Get Version</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.server.Server.login">
+<tt class="descname">login</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.login" title="Permalink to this definition">¶</a></dt>
+<dd>Login</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.server.Server.request">
+<tt class="descname">request</tt><big>(</big><em>command_string</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.request" title="Permalink to this definition">¶</a></dt>
+<dd>Request</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.server.Server.telnet_connect">
+<tt class="descname">telnet_connect</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.telnet_connect" title="Permalink to this definition">¶</a></dt>
+<dd>Telnet Connect</dd></dl>
 
 </dd></dl>
 
@@ -134,7 +149,7 @@ class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="desc
     </div>
     <div class="footer">
       &copy; Copyright 2009, Louis King.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.2.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
     </div>
   </body>
 </html>
