@@ -50,6 +50,14 @@ class Server(object):
         self.version = ""
         self.player_count = 0
         self.players = []
+    
+    def connect(self):
+        """
+        Connect
+        """
+        self.telnet_connect()
+        self.login()
+        self.get_players()
         
     def telnet_connect(self):
         """
@@ -89,10 +97,12 @@ class Server(object):
         """
         Get Player
         """
+        ref = str(ref).lower()
         if ref:
             for player in self.players:
-                if str(player.ref).lower() == str(ref).lower() \
-                or str(player.name).lower() == str(ref).lower():
+                player_name = str(player.name).lower()
+                player_ref = str(player.ref).lower()
+                if ref == player_ref or ref in player_name:
                     return player
 
     def get_version(self):
@@ -108,13 +118,5 @@ class Server(object):
         """
         self.player_count = self.request("player count ?")
         return int(self.player_count)
-    
-    def connect(self):
-        """
-        Connect
-        """
-        self.telnet_connect()
-        self.login()
-        self.get_players()
         
 
