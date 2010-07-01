@@ -347,7 +347,7 @@ class Player(object):
                       line2="",
                       duration=3):
         line1, line2 = urllib.quote(line1), urllib.quote(line2)
-        req_string = "display line1:%s line2:%s duration:%s "
+        req_string = "display %s %s %s"
         self.request(req_string % 
                      (line1, line2, str(duration)))
 
