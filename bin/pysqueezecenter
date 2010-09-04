@@ -18,7 +18,7 @@ LOG_FORMAT_FILE = '%(asctime)s %(name)s[%(process)d] %(levelname)10s %(message)s
 LOGLEVEL_DICT = { 1 : 50, 2:40, 3:20, 4:10, 5:1 }
 DEFAULT_VERBOSITY = 3
 
-VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev"
+VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev",
                   "volume_up", "volume_down", "mute", "unmute", "seek_to",
                   "forward", "rewind", "set_power_state", "set_volume", "show", "display", "infos"]
 
