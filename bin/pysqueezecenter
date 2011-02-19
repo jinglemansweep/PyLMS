@@ -11,6 +11,9 @@ from pysqueezecenter.server import Server
 
 # Globals
 
+PROJECT = "PySqueezeCenter"
+VERSION = "0.93"
+
 logger = logging.getLogger(__name__)
 LOG_HELP = ','.join(["%d=%s" % (4-x, logging.getLevelName((x+1)*10)) for x in xrange(5)])
 LOG_FORMAT_CONS = '%(levelname)s: %(message)s'
@@ -24,7 +27,7 @@ VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev",
 
 # Option Parsing
 
-parser = optparse.OptionParser(usage="%prog or type %prog -h (--help) for help", description=__doc__, version="%prog" + __revision__)
+parser = optparse.OptionParser(usage="%prog or type %prog -h (--help) for help", description=__doc__, version=PROJECT + " v" + VERSION)
 
 parser.add_option("-v", action="count", dest="verbosity", default=DEFAULT_VERBOSITY, help="Verbosity. Add more -v to be more verbose (%s) [default: %%default]" % LOG_HELP)
 parser.add_option("-l", "--logfile", dest="logfile", default=None, help = "Log to file instead of console" )

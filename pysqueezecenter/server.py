@@ -78,8 +78,13 @@ class Server(object):
         """
         # self.logger.debug("Telnet: %s" % (command_string))
         self.telnet.write(command_string + "\n")
-        response = urllib.unquote(self.telnet.read_until("\n"))
-        result = response[len(command_string)-1:-1]
+        response = urllib.unquote(self.telnet.read_until("\n"))[:-1]
+        start = command_string.split(" ")[0]
+        if start in ["songinfo", "trackstat"]:
+            result = response[len(command_string)+1:]
+        else:
+            result = response[len(command_string)-1:]
+        result = result.strip()
         return result
 
     def get_players(self):
@@ -118,5 +123,3 @@ class Server(object):
         """
         self.player_count = self.request("player count ?")
         return int(self.player_count)
-        
-

@@ -560,5 +560,3 @@ class Player(object):
     def ir_button(self, button):
         """Simulate IR Button Press"""
         self.request("button %s" % (button))   
-
-
