@@ -72,9 +72,9 @@ class Player(object):
     def __repr__(self):
         return "Player: %s" % (self.ref)
     
-    def request(self, command_string):
+    def request(self, command_string, preserve_encoding = False):
         """Executes Telnet Request via SqueezeCenter"""
-        return self.server.request("%s %s" % (self.ref, command_string))
+        return self.server.request("%s %s" % (self.ref, command_string), preserve_encoding)
     
     def update(self, index):
         """Update Player Properties from SqueezeCenter"""
@@ -325,6 +325,34 @@ class Player(object):
     def playlist_erase(self, index):
         """Erase Item From Playlist"""
         self.request("playlist delete %i" % (index))
+    
+    def playlist_track_count(self):
+        """Get the amount of tracks in the current playlist"""
+	return int(self.request('playlist tracks ?'))
+    
+    def playlist_play_index(self, index):
+        """Play track at a certain position in the current playlist (index is zero-based)"""
+	return self.request('playlist index %i' % index)
+    
+    def playlist_get_info(self):
+        """Get info about the tracks in the current playlist"""
+        amount = self.playlist_track_count()
+        response = self.request('status 0 %i' % amount, True)
+        encoded_list = response.split('playlist%20index')[1:]
+        playlist = []
+        for encoded in encoded_list:
+            data = [urllib.unquote(x) for x in ('position' + encoded).split(' ')]
+            item = {}
+            for info in data:
+                info = info.split(':')
+                key = info.pop(0)
+                if key:
+                    item[key] = ':'.join(info)
+            item['position'] = int(item['position'])
+            item['id'] = int(item['id'])
+            item['duration'] = float(item['duration'])
+            playlist.append(item)
+        return playlist
     
     # actions
                

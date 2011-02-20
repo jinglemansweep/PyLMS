@@ -72,13 +72,15 @@ class Server(object):
         result = self.request("login %s %s" % (self.username, self.password))
         self.logged_in = (result == "******")
         
-    def request(self, command_string):
+    def request(self, command_string, preserve_encoding = False):
         """
         Request
         """
         # self.logger.debug("Telnet: %s" % (command_string))
         self.telnet.write(command_string + "\n")
-        response = urllib.unquote(self.telnet.read_until("\n"))[:-1]
+	response = self.telnet.read_until("\n")[:-1]
+	if not preserve_encoding:
+	        response = urllib.unquote(response)
         start = command_string.split(" ")[0]
         if start in ["songinfo", "trackstat"]:
             result = response[len(command_string)+1:]
