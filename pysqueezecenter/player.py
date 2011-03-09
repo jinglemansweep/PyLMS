@@ -318,10 +318,6 @@ class Player(object):
         item = urllib.quote(item)
         self.request("playlist deleteitem %s" % (item))
 
-    def playlist_delete_index(self, index):
-        """Delete Item From Playlist By Position (index is zero-based)"""
-        self.request("playlist delete %i" % (index))
-
     def playlist_move(self, from_index, to_index):
         """Move Item In Playlist"""
         self.request("playlist move %i %i" % (from_index, to_index))
