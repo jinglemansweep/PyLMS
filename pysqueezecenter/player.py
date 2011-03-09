@@ -29,7 +29,7 @@ class Player(object):
     
     # internals
     
-    def __init__(self, server=None, index=None):
+    def __init__(self, server=None, index=None, update=True):
         """
         Constructor
         """
@@ -65,45 +65,46 @@ class Player(object):
         self.track_remote = None
         self.track_current_title = None
         self.track_path = None
-        self.update(index)
+        self.update(index, update=update)
 
     def __repr__(self):
         return "Player: %s" % (self.ref)
     
-    def request(self, command_string, preserve_encoding = False):
+    def request(self, command_string, preserve_encoding=False):
         """Executes Telnet Request via SqueezeCenter"""
         return self.server.request("%s %s" % (self.ref, command_string), preserve_encoding)
     
-    def update(self, index):
+    def update(self, index, update=True):
         """Update Player Properties from SqueezeCenter"""
         self.index = index
         self.ref = str(urllib.unquote(
             self.server.request("player id %i ?" % index)
-        ))
-        self.uuid = str(urllib.unquote(
-            self.server.request("player uuid %i ?" % index)
-        ))
+        ))        
         self.name = str(urllib.unquote(
             self.server.request("player name %i ?" % index)
-        ))    
-        self.ip_address = str(urllib.unquote(
-            self.server.request("player ip %i ?" % index)
-        ))    
-        self.model = str(urllib.unquote(
-            self.server.request("player model %i ?" % index)
-        ))   
-        self.display_type = str(urllib.unquote(
-            self.server.request("player displaytype %i ?" % index)
-        ))
-        self.can_power_off = bool(urllib.unquote(
-            self.server.request("player canpoweroff %i ?" % index)
         )) 
-        self.is_player = bool(urllib.unquote(
-            self.server.request("player isplayer %i ?" % index)
-        )) 
-        self.is_connected = bool(urllib.unquote(
-            self.server.request("player connected %i ?" % index)
-        )) 
+        if update:
+            self.uuid = str(urllib.unquote(
+                self.server.request("player uuid %i ?" % index)
+            ))
+            self.ip_address = str(urllib.unquote(
+                self.server.request("player ip %i ?" % index)
+            ))    
+            self.model = str(urllib.unquote(
+                self.server.request("player model %i ?" % index)
+            ))   
+            self.display_type = str(urllib.unquote(
+                self.server.request("player displaytype %i ?" % index)
+            ))
+            self.can_power_off = bool(urllib.unquote(
+                self.server.request("player canpoweroff %i ?" % index)
+            )) 
+            self.is_player = bool(urllib.unquote(
+                self.server.request("player isplayer %i ?" % index)
+            )) 
+            self.is_connected = bool(urllib.unquote(
+                self.server.request("player connected %i ?" % index)
+            )) 
 
     ## getters/setters
 

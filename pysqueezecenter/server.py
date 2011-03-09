@@ -49,13 +49,13 @@ class Server(object):
         self.player_count = 0
         self.players = []
     
-    def connect(self):
+    def connect(self, update=True):
         """
         Connect
         """
         self.telnet_connect()
         self.login()
-        self.get_players()
+        self.get_players(update=update)
         
     def telnet_connect(self):
         """
@@ -87,14 +87,14 @@ class Server(object):
         result = result.strip()
         return result
 
-    def get_players(self):
+    def get_players(self, update=True):
         """
         Get Players
         """
         self.players = []
         player_count = self.get_player_count()
         for i in range(player_count):
-            player = Player(server=self, index=i-1)
+            player = Player(server=self, index=i-1, update=update)
             self.players.append(player)
         return self.players
 

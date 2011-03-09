@@ -44,6 +44,8 @@ parser.add_option("-p", "--password", dest="password", default=None, help="Speci
 parser.add_option("-d", "--device", dest="device", default=None, help="Specify SqueezePlayer Device MAC Address")
 parser.add_option("-i", "--info", dest="info", action="store_true", default=False, help="Show Server/Player Information")
 parser.add_option("-r", "--raw", dest="raw", action="store_true", default=False, help="Output only minimal raw results (useful for scripts)")
+parser.add_option("-q", "--quick", dest="quick", action="store_true", default=False, help="Perform a quick one-time action (does not query current device state)")
+
 
 (options, args) = parser.parse_args()
 
@@ -63,8 +65,13 @@ else:
 sc = Server(hostname=options.host, port=options.port, username=options.username, password=options.password)
 sc.logger = logger
 
+update_mode = not options.quick
+
+if options.info:
+    update_mode = True
+
 try:
-    sc.connect()
+    sc.connect(update=update_mode)
 except:
     logger.error("Cannot connect to SqueezeCenter (%s:%s)" % (options.host, options.port))
     sys.exit(1)
@@ -105,10 +112,11 @@ try:
 except IndexError:
     params = []
 
+raw_cmd = command_map.get(cmd)
+
 for player in players:
     if player is not None:
         if cmd in command_map:
-            raw_cmd = command_map.get(cmd)
             func = getattr(player, raw_cmd, None)
             try:
                 logger.debug("%s: %s [%s]" % (player.name, raw_cmd.upper(), ", ".join(params)))
