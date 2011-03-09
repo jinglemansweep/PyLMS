@@ -317,6 +317,10 @@ class Player(object):
         """Delete Item From Playlist By Name"""
         item = urllib.quote(item)
         self.request("playlist deleteitem %s" % (item))
+    
+    def playlist_clear(self):
+        """Clear the entire playlist. Will stop the player."""
+	self.request("playlist clear")
 
     def playlist_move(self, from_index, to_index):
         """Move Item In Playlist"""
