@@ -13,7 +13,7 @@ from pysqueezecenter.utils import clean_command
 # Globals
 
 PROJECT = "PySqueezeCenter"
-VERSION = "0.93"
+VERSION = "0.94"
 
 logger = logging.getLogger(__name__)
 LOG_HELP = ','.join(["%d=%s" % (4-x, logging.getLevelName((x+1)*10)) for x in xrange(5)])
