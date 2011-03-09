@@ -23,7 +23,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="PySqueezeCenter v0.93 documentation" href="index.html" />
-    <link rel="next" title="Command Line Utility" href="cli.html" />
+    <link rel="next" title="Utility Functions (pysqueezecenter.utils)" href="utils.html" />
     <link rel="prev" title="Server Class (pysqueezecenter.player.Server)" href="server.html" /> 
   </head>
   <body>
@@ -34,7 +34,7 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="cli.html" title="Command Line Utility"
+          <a href="utils.html" title="Utility Functions (pysqueezecenter.utils)"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="server.html" title="Server Class (pysqueezecenter.player.Server)"
@@ -298,6 +298,12 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_clear">
+<tt class="descname">playlist_clear</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear the entire playlist. Will stop the player.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pysqueezecenter.player.Player.playlist_delete">
 <tt class="descname">playlist_delete</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_delete" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete Item From Playlist By Name</p>
@@ -307,6 +313,12 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
 <dt id="pysqueezecenter.player.Player.playlist_erase">
 <tt class="descname">playlist_erase</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_erase" title="Permalink to this definition">¶</a></dt>
 <dd><p>Erase Item From Playlist</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_get_info">
+<tt class="descname">playlist_get_info</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_get_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get info about the tracks in the current playlist</p>
 </dd></dl>
 
 <dl class="method">
@@ -325,6 +337,18 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
 <dt id="pysqueezecenter.player.Player.playlist_play">
 <tt class="descname">playlist_play</tt><big>(</big><em>item</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_play" title="Permalink to this definition">¶</a></dt>
 <dd><p>Play Item Immediately</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_play_index">
+<tt class="descname">playlist_play_index</tt><big>(</big><em>index</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_play_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Play track at a certain position in the current playlist (index is zero-based)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.player.Player.playlist_track_count">
+<tt class="descname">playlist_track_count</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.playlist_track_count" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the amount of tracks in the current playlist</p>
 </dd></dl>
 
 <dl class="method">
@@ -347,7 +371,7 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
 
 <dl class="method">
 <dt id="pysqueezecenter.player.Player.request">
-<tt class="descname">request</tt><big>(</big><em>command_string</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.request" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">request</tt><big>(</big><em>command_string</em>, <em>preserve_encoding=False</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Executes Telnet Request via SqueezeCenter</p>
 </dd></dl>
 
@@ -497,8 +521,8 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
   <p class="topless"><a href="server.html"
                         title="previous chapter">Server Class (pysqueezecenter.player.Server)</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="cli.html"
-                        title="next chapter">Command Line Utility</a></p>
+  <p class="topless"><a href="utils.html"
+                        title="next chapter">Utility Functions (pysqueezecenter.utils)</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/player.txt"
@@ -528,7 +552,7 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="cli.html" title="Command Line Utility"
+          <a href="utils.html" title="Utility Functions (pysqueezecenter.utils)"
              >next</a> |</li>
         <li class="right" >
           <a href="server.html" title="Server Class (pysqueezecenter.player.Server)"

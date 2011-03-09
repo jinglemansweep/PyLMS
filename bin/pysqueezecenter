@@ -8,6 +8,7 @@ __docformat__ = 'restructuredtext en'
 import os, sys, logging, optparse
 
 from pysqueezecenter.server import Server
+from pysqueezecenter.utils import clean_command
 
 # Globals
 
@@ -23,7 +24,12 @@ DEFAULT_VERBOSITY = 3
 
 VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev",
                   "volume_up", "volume_down", "mute", "unmute", "seek_to",
-                  "forward", "rewind", "set_power_state", "set_volume", "show", "display", "infos"]
+                  "forward", "rewind", "set_power_state", "set_volume", "show", "display", "infos",
+                  "get_ref", "get_uuid", "get_name", "get_ip_address", "get_model", "get_display_type",
+                  "get_wifi_signal", "get_mode", "get_time_elapsed", "get_time_remaining", "get_power_state",
+                  "get_ir_state", "get_volume", "get_bass", "get_treble", "get_pitch", "get_rate", "get_muting",
+                  "get_track_genre", "get_track_artist", "get_track_album", "get_track_title",
+                  "get_track_duration", "get_track_remote", "get_track_current_title", "get_track_path"]
 
 # Option Parsing
 
@@ -37,6 +43,7 @@ parser.add_option("-u", "--username", dest="username", default=None, help="Speci
 parser.add_option("-p", "--password", dest="password", default=None, help="Specify Authorisation Password")
 parser.add_option("-d", "--device", dest="device", default=None, help="Specify SqueezePlayer Device MAC Address")
 parser.add_option("-i", "--info", dest="info", action="store_true", default=False, help="Show Server/Player Information")
+parser.add_option("-r", "--raw", dest="raw", action="store_true", default=False, help="Output only minimal raw results (useful for scripts)")
 
 (options, args) = parser.parse_args()
 
@@ -70,7 +77,7 @@ if options.info:
         logger.info("Player: %s | %s | V: %i | M: %s | T: %s | C: %s | W: %s" % (p.ref, p.name, p.get_volume(), p.get_mode(), p.get_time_elapsed(), p.is_connected, p.get_wifi_signal_strength()))
 
 players = []
-if options.device=='all':
+if options.device == 'all':
     players = list(all_players)
 else:
     sel_player = sc.get_player(options.device)
@@ -85,20 +92,34 @@ if not args:
     logger.warn("No arguments provided")
     sys.exit(0)
 
-cmd = args[0].lower()
+command_map = {}
+
+for c in VALID_COMMANDS:
+	cleaned = clean_command(c)
+	command_map[cleaned] = c
+
+cmd = clean_command(args[0])
+
 try:
     params = args[1:]
 except IndexError:
     params = []
 
-
 for player in players:
     if player is not None:
-        if cmd in VALID_COMMANDS:
-            func = getattr(player, cmd, None)
+        if cmd in command_map:
+            raw_cmd = command_map.get(cmd)
+            func = getattr(player, raw_cmd, None)
             try:
-                logger.debug("%s: %s [%s]" % (player.name, cmd.upper(), ", ".join(params)))
-                func(*params)            
+                logger.debug("%s: %s [%s]" % (player.name, raw_cmd.upper(), ", ".join(params)))
+                result = func(*params)
+                if options.raw:
+                    if result is not None:
+                        print result
+                else:
+                    if result is None:
+                        result = "No Output"
+                    logger.info("[%s] %s" % (raw_cmd, result))            
             except ValueError:
                 logger.error("Invalid parameter")
             except TypeError:

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 PySqueezeCenter: Python Wrapper for Logitech SqueezeCenter CLI
 (Telnet) Interface

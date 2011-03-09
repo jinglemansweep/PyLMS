@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 """
 PySqueezeCenter: Python Wrapper for Logitech SqueezeCenter CLI
 (Telnet) Interface
@@ -72,14 +70,14 @@ class Server(object):
         result = self.request("login %s %s" % (self.username, self.password))
         self.logged_in = (result == "******")
         
-    def request(self, command_string, preserve_encoding = False):
+    def request(self, command_string, preserve_encoding=False):
         """
         Request
         """
         # self.logger.debug("Telnet: %s" % (command_string))
         self.telnet.write(command_string + "\n")
-	response = self.telnet.read_until("\n")[:-1]
-	if not preserve_encoding:
+    	response = self.telnet.read_until("\n")[:-1]
+    	if not preserve_encoding:
 	        response = urllib.unquote(response)
         start = command_string.split(" ")[0]
         if start in ["songinfo", "trackstat"]:

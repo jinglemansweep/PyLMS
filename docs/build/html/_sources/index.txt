@@ -13,6 +13,7 @@ Contents:
 
    server.rst
    player.rst
+   utils.rst
    cli.rst
 
 Indices and tables
