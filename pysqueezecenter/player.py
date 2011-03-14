@@ -221,6 +221,8 @@ class Player(object):
             self.volume = int(self.request("mixer volume ?"))
         except TypeError:
             self.volume = -1
+        except ValueError:
+            self.volume = 0
         return self.volume           
 
     def get_bass(self):
@@ -590,4 +592,8 @@ class Player(object):
 
     def ir_button(self, button):
         """Simulate IR Button Press"""
-        self.request("button %s" % (button))   
+        self.request("button %s" % (button)) 
+
+    def randomplay(self, type='tracks'):
+        """play random mix"""
+        self.request("randomplay %s" % (type))

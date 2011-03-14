@@ -13,7 +13,7 @@ from pysqueezecenter.utils import clean_command
 # Globals
 
 PROJECT = "PySqueezeCenter"
-VERSION = "0.94"
+VERSION = "0.95"
 
 logger = logging.getLogger(__name__)
 LOG_HELP = ','.join(["%d=%s" % (4-x, logging.getLevelName((x+1)*10)) for x in xrange(5)])
@@ -29,7 +29,8 @@ VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev",
                   "get_wifi_signal", "get_mode", "get_time_elapsed", "get_time_remaining", "get_power_state",
                   "get_ir_state", "get_volume", "get_bass", "get_treble", "get_pitch", "get_rate", "get_muting",
                   "get_track_genre", "get_track_artist", "get_track_album", "get_track_title",
-                  "get_track_duration", "get_track_remote", "get_track_current_title", "get_track_path"]
+                  "get_track_duration", "get_track_remote", "get_track_current_title", "get_track_path",
+				  "randomplay"]
 
 # Option Parsing
 
