@@ -82,7 +82,7 @@ class Server(object):
         else:
                 command_string_quoted = command_string[0:command_string.find(':')] + command_string[command_string.find(':'):].replace(':',urllib.quote(':'))
         start = command_string.split(" ")[0]
-        if start in ["songinfo", "trackstat", "albums", "songs", "artists"]:
+        if start in ["songinfo", "trackstat", "albums", "songs", "artists", "rescan", "rescanprogress"]:
             if not preserve_encoding:
                 result = response[len(command_string)+1:]
             else:
@@ -100,23 +100,31 @@ class Server(object):
         Request with results
         Return tuple (count, results, error_occured)
         """
+        quotedColon = urllib.quote(':')
         try:
             #init
             quotedColon = urllib.quote(':')
             #request command string
             resultStr = ' '+self.request(command_string, True)
             #get number of results
+            count = 0
             if resultStr.rfind('count%s'%quotedColon)>=0:
                 count = int(resultStr[resultStr.rfind('count%s'%quotedColon):].replace('count%s'%quotedColon,''))
             #remove number of results from result string and cut result string by "id:"
-            results = resultStr[:resultStr.rfind('count')-1].split(' id%s'%quotedColon)
-            
+            idIsSep = True
+            if resultStr.find(' id%s'%quotedColon)<0:
+                idIsSep = False
+            if resultStr.find('count')>=0:
+                resultStr = resultStr[:resultStr.rfind('count')-1]
+            results = resultStr.split(' id%s'%quotedColon)
+
             output = []
             for result in results:
                 result = result.strip()
                 if len(result)>0:
-                    #fix missing 'id:' at beginning
-                    result = 'id%s%s' % (quotedColon, result)
+                    if idIsSep:
+                        #fix missing 'id:' at beginning
+                        result = 'id%s%s' % (quotedColon, result)
                     subResults = result.split(' ')
                     item = {}
                     for subResult in subResults:
@@ -131,6 +139,7 @@ class Server(object):
         except Exception as e:
             #error parsing results (not correct?)
             return 0,[],True
+
 
     def get_players(self, update=True):
         """
@@ -180,3 +189,29 @@ class Server(object):
         elif mode=='artists':
             return self.request_with_results("artists 0 50 search:%s" % (term))
 
+    def rescan(self, mode='fast'):
+        """
+        Rescan library
+        Mode can be 'fast' for update changes on library, 'full' for complete library scan and 'playlists' for playlists scan only
+        """
+        is_scanning = True
+        try:
+            is_scanning = bool(self.request("rescan ?"))
+        except:
+            pass
+        
+        if not is_scanning:
+            if mode=='fast':
+                return self.request("rescan")
+            elif mode=='full':
+                return self.request("wipecache")
+            elif mode=='playlists':
+                return self.request("rescan playlists")
+        else:
+            return ""
+        
+    def rescanprogress(self):
+        """
+        Return current rescan progress
+        """
+        return self.request_with_results("rescanprogress")

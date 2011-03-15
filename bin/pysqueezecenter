@@ -30,7 +30,7 @@ VALID_COMMANDS = ["play", "stop", "pause", "unpause", "toggle", "next", "prev",
                   "get_ir_state", "get_volume", "get_bass", "get_treble", "get_pitch", "get_rate", "get_muting",
                   "get_track_genre", "get_track_artist", "get_track_album", "get_track_title",
                   "get_track_duration", "get_track_remote", "get_track_current_title", "get_track_path",
-                  "randomplay", "search"]
+                  "randomplay", "search", "rescan", "rescanprogress"]
 
 # Option Parsing
 
