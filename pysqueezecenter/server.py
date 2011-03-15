@@ -79,13 +79,58 @@ class Server(object):
     	response = self.telnet.read_until("\n")[:-1]
     	if not preserve_encoding:
 	        response = urllib.unquote(response)
-        start = command_string.split(" ")[0]
-        if start in ["songinfo", "trackstat"]:
-            result = response[len(command_string)+1:]
         else:
-            result = response[len(command_string)-1:]
+                command_string_quoted = command_string[0:command_string.find(':')] + command_string[command_string.find(':'):].replace(':',urllib.quote(':'))
+        start = command_string.split(" ")[0]
+        if start in ["songinfo", "trackstat", "albums", "songs", "artists"]:
+            if not preserve_encoding:
+                result = response[len(command_string)+1:]
+            else:
+                result = response[len(command_string_quoted)+1:]
+        else:
+            if not preserve_encoding:
+                result = response[len(command_string)-1:]
+            else:
+                result = response[len(command_string_quoted)-1:]
         result = result.strip()
         return result
+
+    def request_with_results(self, command_string, preserve_encoding=False):
+        """
+        Request with results
+        Return tuple (count, results, error_occured)
+        """
+        try:
+            #init
+            quotedColon = urllib.quote(':')
+            #request command string
+            resultStr = ' '+self.request(command_string, True)
+            #get number of results
+            if resultStr.rfind('count%s'%quotedColon)>=0:
+                count = int(resultStr[resultStr.rfind('count%s'%quotedColon):].replace('count%s'%quotedColon,''))
+            #remove number of results from result string and cut result string by "id:"
+            results = resultStr[:resultStr.rfind('count')-1].split(' id%s'%quotedColon)
+            
+            output = []
+            for result in results:
+                result = result.strip()
+                if len(result)>0:
+                    #fix missing 'id:' at beginning
+                    result = 'id%s%s' % (quotedColon, result)
+                    subResults = result.split(' ')
+                    item = {}
+                    for subResult in subResults:
+                        #save item
+                        key,value = subResult.split(quotedColon,1)
+                        if not preserve_encoding:
+                            item[urllib.unquote(key)] = urllib.unquote(value)
+                        else:
+                            item[key] = value
+                    output.append(item)
+            return count,output,False
+        except Exception as e:
+            #error parsing results (not correct?)
+            return 0,[],True
 
     def get_players(self, update=True):
         """
@@ -123,3 +168,15 @@ class Server(object):
         """
         self.player_count = self.request("player count ?")
         return int(self.player_count)
+
+    def search(self, term, mode='albums'):
+        """
+        Search term in database
+        """
+        if mode=='albums':
+            return self.request_with_results("albums 0 50 tags:%s search:%s" % ("l", term))
+        elif mode=='songs':
+            return self.request_with_results("songs 0 50 tags:%s search:%s" % ("", term))
+        elif mode=='artists':
+            return self.request_with_results("artists 0 50 search:%s" % (term))
+
