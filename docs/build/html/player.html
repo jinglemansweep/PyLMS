@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Player Class (pysqueezecenter.player.Player) &mdash; PySqueezeCenter v0.93 documentation</title>
+    <title>Player Class (pysqueezecenter.player.Player) &mdash; PySqueezeCenter v0.94 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.93',
+        VERSION:     '0.94',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="PySqueezeCenter v0.93 documentation" href="index.html" />
+    <link rel="top" title="PySqueezeCenter v0.94 documentation" href="index.html" />
     <link rel="next" title="Utility Functions (pysqueezecenter.utils)" href="utils.html" />
     <link rel="prev" title="Server Class (pysqueezecenter.player.Server)" href="server.html" /> 
   </head>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="server.html" title="Server Class (pysqueezecenter.player.Server)"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">PySqueezeCenter v0.93 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PySqueezeCenter v0.94 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,7 +56,7 @@ devices that are connected and registered with the SqueezeCenter server.</p>
 via the parent Server (pysqueezecenter.server.Server) class.</p>
 <dl class="class">
 <dt id="pysqueezecenter.player.Player">
-<em class="property">class </em><tt class="descclassname">pysqueezecenter.player.</tt><tt class="descname">Player</tt><big>(</big><em>server=None</em>, <em>index=None</em>, <em>update=True</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pysqueezecenter.player.</tt><tt class="descname">Player</tt><big>(</big><em>server=None</em>, <em>index=None</em>, <em>update=True</em>, <em>charset='utf8'</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player" title="Permalink to this definition">¶</a></dt>
 <dd><p>SqueezeCenter Player</p>
 <dl class="method">
 <dt id="pysqueezecenter.player.Player.bass_down">
@@ -358,6 +358,12 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="pysqueezecenter.player.Player.randomplay">
+<tt class="descname">randomplay</tt><big>(</big><em>type='tracks'</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.randomplay" title="Permalink to this definition">¶</a></dt>
+<dd><p>play random mix</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="pysqueezecenter.player.Player.rate_down">
 <tt class="descname">rate_down</tt><big>(</big><em>amount=1</em><big>)</big><a class="headerlink" href="#pysqueezecenter.player.Player.rate_down" title="Permalink to this definition">¶</a></dt>
 <dd><p>Decrease Player Rate</p>
@@ -557,7 +563,7 @@ via the parent Server (pysqueezecenter.server.Server) class.</p>
         <li class="right" >
           <a href="server.html" title="Server Class (pysqueezecenter.player.Server)"
              >previous</a> |</li>
-        <li><a href="index.html">PySqueezeCenter v0.93 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PySqueezeCenter v0.94 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

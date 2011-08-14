@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Class (pysqueezecenter.player.Server) &mdash; PySqueezeCenter v0.93 documentation</title>
+    <title>Server Class (pysqueezecenter.player.Server) &mdash; PySqueezeCenter v0.94 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.93',
+        VERSION:     '0.94',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="PySqueezeCenter v0.93 documentation" href="index.html" />
+    <link rel="top" title="PySqueezeCenter v0.94 documentation" href="index.html" />
     <link rel="next" title="Player Class (pysqueezecenter.player.Player)" href="player.html" />
     <link rel="prev" title="PySqueezeCenter Documentation" href="index.html" /> 
   </head>
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="index.html" title="PySqueezeCenter Documentation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">PySqueezeCenter v0.93 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PySqueezeCenter v0.94 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -55,7 +55,7 @@ communication functions between the PySqueezeCenter API and the SqueezeCenter&#8
 Telnet server.</p>
 <dl class="class">
 <dt id="pysqueezecenter.server.Server">
-<em class="property">class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="descname">Server</tt><big>(</big><em>hostname='localhost'</em>, <em>port=9090</em>, <em>username=''</em>, <em>password=''</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">pysqueezecenter.server.</tt><tt class="descname">Server</tt><big>(</big><em>hostname='localhost'</em>, <em>port=9090</em>, <em>username=''</em>, <em>password=''</em>, <em>charset='utf8'</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server" title="Permalink to this definition">¶</a></dt>
 <dd><p>SqueezeCenter Server</p>
 <dl class="method">
 <dt id="pysqueezecenter.server.Server.connect">
@@ -97,6 +97,32 @@ Telnet server.</p>
 <dt id="pysqueezecenter.server.Server.request">
 <tt class="descname">request</tt><big>(</big><em>command_string</em>, <em>preserve_encoding=False</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Request</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.server.Server.request_with_results">
+<tt class="descname">request_with_results</tt><big>(</big><em>command_string</em>, <em>preserve_encoding=False</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.request_with_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request with results
+Return tuple (count, results, error_occured)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.server.Server.rescan">
+<tt class="descname">rescan</tt><big>(</big><em>mode='fast'</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.rescan" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rescan library
+Mode can be &#8216;fast&#8217; for update changes on library, &#8216;full&#8217; for complete library scan and &#8216;playlists&#8217; for playlists scan only</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.server.Server.rescanprogress">
+<tt class="descname">rescanprogress</tt><big>(</big><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.rescanprogress" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return current rescan progress</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="pysqueezecenter.server.Server.search">
+<tt class="descname">search</tt><big>(</big><em>term</em>, <em>mode='albums'</em><big>)</big><a class="headerlink" href="#pysqueezecenter.server.Server.search" title="Permalink to this definition">¶</a></dt>
+<dd><p>Search term in database</p>
 </dd></dl>
 
 <dl class="method">
@@ -155,7 +181,7 @@ Telnet server.</p>
         <li class="right" >
           <a href="index.html" title="PySqueezeCenter Documentation"
              >previous</a> |</li>
-        <li><a href="index.html">PySqueezeCenter v0.93 documentation</a> &raquo;</li> 
+        <li><a href="index.html">PySqueezeCenter v0.94 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
