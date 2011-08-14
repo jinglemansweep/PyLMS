@@ -20,8 +20,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
 import telnetlib
-import urllib
 from pysqueezecenter.player import Player
+    
 
 class Server(object):
 
@@ -32,7 +32,8 @@ class Server(object):
     def __init__(self, hostname="localhost",
                        port=9090, 
                        username="", 
-                       password=""):
+                       password="",
+                       charset="utf8"):
                        
         """
         Constructor
@@ -48,6 +49,7 @@ class Server(object):
         self.version = ""
         self.player_count = 0
         self.players = []
+        self.charset = charset
     
     def connect(self, update=True):
         """
@@ -75,12 +77,12 @@ class Server(object):
         Request
         """
         # self.logger.debug("Telnet: %s" % (command_string))
-        self.telnet.write(command_string + "\n")
-    	response = self.telnet.read_until("\n")[:-1]
-    	if not preserve_encoding:
-	        response = urllib.unquote(response)
+        self.telnet.write(self.__encode(command_string + "\n"))
+        response = self.__decode(self.telnet.read_until(self.__encode("\n"))[:-1])
+        if not preserve_encoding:
+            response = self.__unquote(response)
         else:
-                command_string_quoted = command_string[0:command_string.find(':')] + command_string[command_string.find(':'):].replace(':',urllib.quote(':'))
+            command_string_quoted = command_string[0:command_string.find(':')] + command_string[command_string.find(':'):].replace(':',self.__quote(':'))
         start = command_string.split(" ")[0]
         if start in ["songinfo", "trackstat", "albums", "songs", "artists", "rescan", "rescanprogress"]:
             if not preserve_encoding:
@@ -100,7 +102,7 @@ class Server(object):
         Request with results
         Return tuple (count, results, error_occured)
         """
-        quotedColon = urllib.quote(':')
+        quotedColon = self.__quote(':')
         try:
             #init
             quotedColon = urllib.quote(':')
@@ -131,7 +133,7 @@ class Server(object):
                         #save item
                         key,value = subResult.split(quotedColon,1)
                         if not preserve_encoding:
-                            item[urllib.unquote(key)] = urllib.unquote(value)
+                            item[urllib.unquote(key)] = self.__unquote(value)
                         else:
                             item[key] = value
                     output.append(item)
@@ -215,3 +217,25 @@ class Server(object):
         Return current rescan progress
         """
         return self.request_with_results("rescanprogress")
+    
+    def __encode(self, text):
+        return text.encode(self.charset)
+    
+    def __decode(self, bytes):
+        return bytes.decode(self.charset)
+    
+    def __quote(self, text):
+        try:
+            import urllib.parse
+            return urllib.parse.quote(text, encoding=self.charset)
+        except ImportError:
+            import urllib
+            return urllib.quote(text)
+
+    def __unquote(self, text):
+        try:
+            import urllib.parse
+            return urllib.parse.unquote(text, encoding=self.charset)
+        except ImportError:
+            import urllib
+            return urllib.unquote(text)

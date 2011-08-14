@@ -19,7 +19,6 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 """
 
-import urllib
 
 class Player(object):
     
@@ -29,13 +28,14 @@ class Player(object):
     
     # internals
     
-    def __init__(self, server=None, index=None, update=True):
+    def __init__(self, server=None, index=None, update=True, charset="utf8"):
         """
         Constructor
         """
         self.server = server
         self.logger = None
         self.index = None
+        self.charset = charset
         self.ref = None
         self.uuid = None
         self.name = None
@@ -77,32 +77,32 @@ class Player(object):
     def update(self, index, update=True):
         """Update Player Properties from SqueezeCenter"""
         self.index = index
-        self.ref = str(urllib.unquote(
+        self.ref = str(self.__unquote(
             self.server.request("player id %i ?" % index)
         ))        
-        self.name = str(urllib.unquote(
+        self.name = str(self.__unquote(
             self.server.request("player name %i ?" % index)
         )) 
         if update:
-            self.uuid = str(urllib.unquote(
+            self.uuid = str(self.__unquote(
                 self.server.request("player uuid %i ?" % index)
             ))
-            self.ip_address = str(urllib.unquote(
+            self.ip_address = str(self.__unquote(
                 self.server.request("player ip %i ?" % index)
             ))    
-            self.model = str(urllib.unquote(
+            self.model = str(self.__unquote(
                 self.server.request("player model %i ?" % index)
             ))   
-            self.display_type = str(urllib.unquote(
+            self.display_type = str(self.__unquote(
                 self.server.request("player displaytype %i ?" % index)
             ))
-            self.can_power_off = bool(urllib.unquote(
+            self.can_power_off = bool(self.__unquote(
                 self.server.request("player canpoweroff %i ?" % index)
             )) 
-            self.is_player = bool(urllib.unquote(
+            self.is_player = bool(self.__unquote(
                 self.server.request("player isplayer %i ?" % index)
             )) 
-            self.is_connected = bool(urllib.unquote(
+            self.is_connected = bool(self.__unquote(
                 self.server.request("player connected %i ?" % index)
             )) 
 
@@ -144,7 +144,7 @@ class Player(object):
 
     def has_permission(self, request_terms):
         """Check Player User Permissions"""
-        request_terms = urllib.quote(request_terms)
+        request_terms = self.__quote(request_terms)
         granted = int(self.request("can %s ?" % (request_terms)))
         return (granted == 1)
     
@@ -163,7 +163,7 @@ class Player(object):
         if namespace:
             pref_string += namespace + ":"
         pref_string += name
-        value = urllib.quote(value)
+        value = self.__quote(value)
         valid = self.request("playerpref validate %s %s" % 
             (pref_string, value))
         if "valid:1" in valid:
@@ -301,27 +301,27 @@ class Player(object):
     
     def playlist_play(self, item):
         """Play Item Immediately"""
-        item = urllib.quote(item)
+        item = self.__quote(item)
         self.request("playlist play %s" % (item))        
 
     def playlist_add(self, item):
         """Add Item To Playlist"""
-        item = urllib.quote(item)
+        item = self.__quote(item)
         self.request("playlist add %s" % (item))    
     
     def playlist_insert(self, item):
         """Insert Item Into Playlist (After Current Track)"""
-        item = urllib.quote(item)
+        item = self.__quote(item)
         self.request("playlist insert %s" % (item))
 
     def playlist_delete(self, item):
         """Delete Item From Playlist By Name"""
-        item = urllib.quote(item)
+        item = self.__quote(item)
         self.request("playlist deleteitem %s" % (item))
     
     def playlist_clear(self):
         """Clear the entire playlist. Will stop the player."""
-	self.request("playlist clear")
+        self.request("playlist clear")
 
     def playlist_move(self, from_index, to_index):
         """Move Item In Playlist"""
@@ -333,11 +333,11 @@ class Player(object):
     
     def playlist_track_count(self):
         """Get the amount of tracks in the current playlist"""
-	return int(self.request('playlist tracks ?'))
+        return int(self.request('playlist tracks ?'))
     
     def playlist_play_index(self, index):
         """Play track at a certain position in the current playlist (index is zero-based)"""
-	return self.request('playlist index %i' % index)
+        return self.request('playlist index %i' % index)
     
     def playlist_get_info(self):
         """Get info about the tracks in the current playlist"""
@@ -346,7 +346,7 @@ class Player(object):
         encoded_list = response.split('playlist%20index')[1:]
         playlist = []
         for encoded in encoded_list:
-            data = [urllib.unquote(x) for x in ('position' + encoded).split(' ')]
+            data = [self.__unquote(x) for x in ('position' + encoded).split(' ')]
             item = {}
             for info in data:
                 info = info.split(':')
@@ -370,7 +370,7 @@ class Player(object):
         """Displays text on Player display"""
         if font == "huge":
             line1 = ""
-        line1, line2 = urllib.quote(line1), urllib.quote(line2)
+        line1, line2 = self.__quote(line1), self.__quote(line2)
         req_string = "show line1:%s line2:%s duration:%s "
         req_string += "brightness:%s font:%s centered:%i"
         self.request(req_string % 
@@ -379,7 +379,7 @@ class Player(object):
     def display(self, line1="",
                       line2="",
                       duration=3):
-        line1, line2 = urllib.quote(line1), urllib.quote(line2)
+        line1, line2 = self.__quote(line1), self.__quote(line2)
         req_string = "display %s %s %s"
         self.request(req_string % 
                      (line1, line2, str(duration)))
@@ -597,3 +597,19 @@ class Player(object):
     def randomplay(self, type='tracks'):
         """play random mix"""
         self.request("randomplay %s" % (type))
+        
+    def __quote(self, text):
+        try:
+            import urllib.parse
+            return urllib.parse.quote(text, encoding=self.charset)
+        except ImportError:
+            import urllib
+            return urllib.quote(text)
+
+    def __unquote(self, text):
+        try:
+            import urllib.parse
+            return urllib.parse.unquote(text, encoding=self.charset)
+        except ImportError:
+            import urllib
+            return urllib.unquote(text)
