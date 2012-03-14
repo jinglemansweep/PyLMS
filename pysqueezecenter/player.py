@@ -597,6 +597,12 @@ class Player(object):
     def randomplay(self, type='tracks'):
         """play random mix"""
         self.request("randomplay %s" % (type))
+
+    def sync_to(self, other_player_ref):
+        self.server.request("%s sync %s" % (other_player_ref, self.ref))
+
+    def unsync(self):
+	self.request("sync -")
         
     def __quote(self, text):
         try:
