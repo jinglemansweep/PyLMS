@@ -599,9 +599,11 @@ class Player(object):
         self.request("randomplay %s" % (type))
 
     def sync_to(self, other_player_ref):
+        """Sync to another player with a given Ref"""
         self.server.request("%s sync %s" % (other_player_ref, self.ref))
 
     def unsync(self):
+        """Unsync player"""
 	self.request("sync -")
         
     def __quote(self, text):
