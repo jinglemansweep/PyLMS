@@ -3,7 +3,7 @@ Command Line Utility
 
 Help::
 
-  Usage: pysqueezecenter or type pysqueezecenter -h (--help) for help
+  Usage: pylms or type pylms -h (--help) for help
 
   Options:
     --version             show program's version number and exit
@@ -13,8 +13,8 @@ Help::
                           [default: 3]
     -l LOGFILE, --logfile=LOGFILE
                           Log to file instead of console
-    -s HOST, --host=HOST  Specify Hostname of SqueezeCenter [default: localhost]
-    -n PORT, --port=PORT  Specify Port of SqueezeCenter [default: 9090]
+    -s HOST, --host=HOST  Specify Hostname of Server [default: localhost]
+    -n PORT, --port=PORT  Specify Port of Server [default: 9090]
     -u USERNAME, --username=USERNAME
                           Specify Authorisation Username
     -p PASSWORD, --password=PASSWORD

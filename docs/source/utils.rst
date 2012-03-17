@@ -1,10 +1,10 @@
-Utility Functions (pysqueezecenter.utils)
+Utility Functions (pylms.utils)
 =========================================
 
 The module contains several utility functions used throughout the
 library.
 
-.. autoclass:: pysqueezecenter.utils
+.. autoclass:: pylms.utils
    :members:
    :undoc-members:
 

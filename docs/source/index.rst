@@ -1,8 +1,8 @@
-PySqueezeCenter Documentation
-=============================
+PyLMS Documentation
+===================
 
-PySqueezeCenter is a Python wrapper library for communication with a
-Logitech SqueezeCenter CLI (Telnet) interface. Once connected, it is
+PyLMS is a Python wrapper library for communication with a
+Logitech Media Server CLI (Telnet) interface. Once connected, it is
 possible to control the server and any compatible Logitech SqueezeBox
 devices associated with it.
 
