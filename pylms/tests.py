@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from pylms import server
 
 s = server.Server("10.0.2.10")

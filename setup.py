@@ -12,8 +12,6 @@ setup(
 	url="https://github.com/jingleman/PyLMS",
 	packages = ["pylms"],
     scripts = [os.path.join("bin", "pylms"),],
-	test_suite = "nose.collector",
-    install_requires = [],
 	long_description="""Python Wrapper Library for Logitech Media Server CLI (Telnet) Interface""",
 	classifiers=[
         "Development Status :: 5 - Production/Stable",
