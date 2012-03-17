@@ -1,3 +1,0 @@
-include README ez_setup.py
-recursive-include pysqueezecenter *
-recursive-include docs/build/html *
