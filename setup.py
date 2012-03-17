@@ -5,13 +5,13 @@ from distutils.core import setup
 
 setup(
 	name="pylms",
-	version="0.95",
+	version="1.0",
 	description="PyLMS (Python Logitech Media Server API Library)",
 	author="JingleManSweep",
 	author_email="jinglemansweep@gmail.com",
 	url="http://www.louisking.co.uk",
-	packages = ["pysqueezecenter"],
-    scripts = [os.path.join("bin", "pysqueezecenter"),],
+	packages = ["pylms"],
+    scripts = [os.path.join("bin", "pylms"),],
 	test_suite = "nose.collector",
     install_requires = [],
 	long_description="""Python Wrapper Library for Logitech Media Server CLI (Telnet) Interface""",
