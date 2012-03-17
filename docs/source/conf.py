@@ -21,7 +21,7 @@ import sys, os
 # absolute, like shown here.
 
 sys.path.insert(0, os.path.abspath('../..'))
-sys.path.insert(0, os.path.abspath('../../pysqueezecenter'))
+sys.path.insert(0, os.path.abspath('../../pylms'))
 
 class Mock(object):
 
