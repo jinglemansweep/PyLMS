@@ -37,9 +37,6 @@ The following functions are supported:
 * Playlist Control (Play, Add, Insert, Delete, Move etc.)
 * Player Control (Play, Stop, Pause, Volume, Muting, Power, IR Remote, Volume, Bass, Treble, Pitch etc.)
 
-[View
-Documentation](http://readthedocs.org/docs/pylms-python-logitech-media-server/en/latest/)
-
 Example:
 
     #!/usr/bin/env python
@@ -59,3 +56,10 @@ Example:
     
     print sq.get_track_title()
     print sq.get_time_remaining()
+
+Links
+=====
+
+* [Documentation](http://readthedocs.org/docs/pylms-python-logitech-media-server/en/latest/)
+* [Discussion Group](http://groups.google.com/group/pysqueezecenter-discuss)
+* [Logitech Wiki](http://wiki.slimdevices.com/index.php/Main_Page) 
