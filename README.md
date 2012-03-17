@@ -42,22 +42,20 @@ Documentation](http://readthedocs.org/docs/pylms-python-logitech-media-server/en
 
 Example:
 
-
-```#!/usr/bin/env python
-
-from pylms.server import Server
-from pylms.player import Player
-
-sc = Server(hostname="192.168.1.1", port=9090, username="user", password="password")
-sc.connect()
-
-print "Logged in: %s" % sc.logged_in
-print "Version: %s" % sc.get_version()
-
-sq = sc.get_player("00:11:22:33:44:55")
-
-print "Name: %s | Mode: %s | Time: %s | Connected: %s | WiFi: %s" % (sq.get_name(), sq.get_mode(), sq.get_time_elapsed(), sq.is_connected, sq.get_wifi_signal_strength())
-
-print sq.get_track_title()
-print sq.get_time_remaining()
-```
+    #!/usr/bin/env python
+    
+    from pylms.server import Server
+    from pylms.player import Player
+    
+    sc = Server(hostname="192.168.1.1", port=9090, username="user", password="password")
+    sc.connect()
+    
+    print "Logged in: %s" % sc.logged_in
+    print "Version: %s" % sc.get_version()
+    
+    sq = sc.get_player("00:11:22:33:44:55")
+    
+    print "Name: %s | Mode: %s | Time: %s | Connected: %s | WiFi: %s" % (sq.get_name(), sq.get_mode(), sq.get_time_elapsed(), sq.is_connected, sq.get_wifi_signal_strength())
+    
+    print sq.get_track_title()
+    print sq.get_time_remaining()
