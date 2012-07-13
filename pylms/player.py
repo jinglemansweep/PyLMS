@@ -604,7 +604,7 @@ class Player(object):
 
     def unsync(self):
         """Unsync player"""
-	self.request("sync -")
+        self.request("sync -")
         
     def __quote(self, text):
         try:
