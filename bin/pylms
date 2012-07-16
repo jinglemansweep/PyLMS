@@ -16,7 +16,7 @@ PROJECT = "PyLMS"
 VERSION = "1.00"
 
 logger = logging.getLogger(__name__)
-LOG_HELP = ','.join(["%d=%s" % (4-x, logging.getLevelName((x+1)*10)) for x in xrange(5)])
+LOG_HELP = ','.join(["%d=%s" % (4-x, logging.getLevelName((x+1)*10)) for x in range(5)])
 LOG_FORMAT_CONS = '%(levelname)s: %(message)s'
 LOG_FORMAT_FILE = '%(asctime)s %(name)s[%(process)d] %(levelname)10s %(message)s'
 LOGLEVEL_DICT = { 1 : 50, 2:40, 3:20, 4:10, 5:1 }
@@ -59,7 +59,7 @@ if options.logfile is None:
 else:
     logfilename = os.path.normpath(options.logfile)
     logging.basicConfig(level=verbosity, format=LOG_FORMAT_FILE, filename=logfilename, filemode='a')
-    print >> sys.stderr, "Logging to %s" % logfilename
+    print("Logging to %s" % logfilename, file=sys.stderr)
 
 # Main
 
@@ -124,7 +124,7 @@ if len(players)==0:
             result = func(*params)
             if options.raw:
                 if result is not None:
-                    print result
+                    print(result)
             else:
                 if result is None:
                     result = "No Output"
@@ -145,7 +145,7 @@ else:
                     result = func(*params)
                     if options.raw:
                         if result is not None:
-                            print result
+                            print(result)
                     else:
                         if result is None:
                             result = "No Output"
