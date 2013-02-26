@@ -1,3 +1,4 @@
+[![Flattr this git repo](http://api.flattr.com/button/flattr-badge-large.png)](https://flattr.com/submit/auto?user_id=jinglemansweep&url=https://github.com/jingleman/PyLMS&title=PyLMS&language=&tags=github&category=software)
 
 Installation
 ============
