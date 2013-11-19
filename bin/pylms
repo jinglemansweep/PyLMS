@@ -1,14 +1,13 @@
 #!/usr/bin/env python
 
-""" PyLMS Command Line Tool """
+from __future__ import print_function
+import os, sys, logging, optparse
+from pylms.server import Server
+from pylms.utils import clean_command
 
 __revision__ = "$Id$"
 __docformat__ = 'restructuredtext en'
 
-import os, sys, logging, optparse
-
-from pylms.server import Server
-from pylms.utils import clean_command
 
 # Globals
 
