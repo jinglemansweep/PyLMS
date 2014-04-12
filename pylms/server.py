@@ -62,6 +62,9 @@ class Server(object):
         self.login()
         self.get_players(update=update)
 
+    def disconnect(self):
+        self.telnet.close()
+
     def telnet_connect(self):
         """
         Telnet Connect
