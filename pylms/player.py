@@ -21,13 +21,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 
 class Player(object):
-    
     """
     Player
     """
-    
+
     # internals
-    
+
     def __init__(self, server=None, index=None, update=True, charset="utf8"):
         """
         Constructor
@@ -45,7 +44,7 @@ class Player(object):
         self.is_player = None
         self.display_type = None
         self.can_power_off = None
-        self.wifi_signal_strength = None        
+        self.wifi_signal_strength = None
         self.mode = None
         self.time = None
         self.power_state = None
@@ -69,49 +68,46 @@ class Player(object):
 
     def __repr__(self):
         return "Player: %s" % (self.ref)
-    
+
     def request(self, command_string, preserve_encoding=False):
         """Executes Telnet Request via Server"""
-        return self.server.request("%s %s" % (self.ref, command_string), preserve_encoding)
-    
+        return self.server.request(
+            "%s %s" % (self.ref, command_string), preserve_encoding)
+
     def update(self, index, update=True):
         """Update Player Properties from Server"""
         self.index = index
-        self.ref = str(self.__unquote(
-            self.server.request("player id %i ?" % index)
-        ))        
-        self.name = str(self.__unquote(
-            self.server.request("player name %i ?" % index)
-        )) 
+        self.ref = self.server.request("player id %i ?" % index)
+        self.name = self.server.request("player name %i ?" % index)
         if update:
             self.uuid = str(self.__unquote(
                 self.server.request("player uuid %i ?" % index)
             ))
             self.ip_address = str(self.__unquote(
                 self.server.request("player ip %i ?" % index)
-            ))    
+            ))
             self.model = str(self.__unquote(
                 self.server.request("player model %i ?" % index)
-            ))   
+            ))
             self.display_type = str(self.__unquote(
                 self.server.request("player displaytype %i ?" % index)
             ))
             self.can_power_off = bool(self.__unquote(
                 self.server.request("player canpoweroff %i ?" % index)
-            )) 
+            ))
             self.is_player = bool(self.__unquote(
                 self.server.request("player isplayer %i ?" % index)
-            )) 
+            ))
             self.is_connected = bool(self.__unquote(
                 self.server.request("player connected %i ?" % index)
-            )) 
+            ))
 
     ## getters/setters
 
     def get_ref(self):
         """Get Player Ref"""
         return self.ref
-    
+
     def get_uuid(self):
         """Get Player UUID"""
         return self.uuid
@@ -124,19 +120,19 @@ class Player(object):
         """Set Player Name"""
         self.request("name %s" % (name))
         self.update(self.index)
-    
+
     def get_ip_address(self):
         """Get Player IP Address"""
         return self.ip_address
-    
+
     def get_model(self):
         """Get Player Model String"""
         return self.model
-    
+
     def get_display_type(self):
         """Get Player Display Type String"""
         return self.display_type
-    
+
     def get_wifi_signal_strength(self):
         """Get Player WiFi Signal Strength"""
         self.wifi_signal_strength = self.request("signalstrength ?")
@@ -147,7 +143,7 @@ class Player(object):
         request_terms = self.__quote(request_terms)
         granted = int(self.request("can %s ?" % (request_terms)))
         return (granted == 1)
-    
+
     def get_pref_value(self, name, namespace=None):
         """Get Player Preference Value"""
         pref_string = ""
@@ -164,19 +160,19 @@ class Player(object):
             pref_string += namespace + ":"
         pref_string += name
         value = self.__quote(value)
-        valid = self.request("playerpref validate %s %s" % 
-            (pref_string, value))
+        valid = self.request(
+            "playerpref validate %s %s" % (pref_string, value))
         if "valid:1" in valid:
             self.request("playerpref %s %s" % (pref_string, value))
             return True
         else:
             return False
-    
+
     def get_mode(self):
         """Get Player Mode"""
         self.mode = str(self.request("mode ?"))
         return self.mode
-    
+
     def get_time_elapsed(self):
         """Get Player Time Elapsed"""
         try:
@@ -184,7 +180,7 @@ class Player(object):
         except TypeError:
             self.time = float(0)
         return self.time
-    
+
     def get_time_remaining(self):
         """Get Player Time Remaining"""
         if self.get_mode() == "play":
@@ -192,17 +188,17 @@ class Player(object):
             return remaining
         else:
             return 0
-    
+
     def get_power_state(self):
         """Get Player Power State"""
         state = int(self.request("power ?"))
         self.power_state = (state != 0)
         return self.power_state
-    
+
     def set_power_state(self, state):
         """Set Player Power State"""
         self.request("power %i" % (int(state)))
-        self.get_power_state()    
+        self.get_power_state()
 
     def get_ir_state(self):
         """Get Player Infrared State"""
@@ -213,8 +209,8 @@ class Player(object):
     def set_ir_state(self, state):
         """Set Player Power State"""
         self.request("irenable %i" % (int(state)))
-        self.get_ir_state()   
-               
+        self.get_ir_state()
+
     def get_volume(self):
         """Get Player Volume"""
         try:
@@ -223,27 +219,27 @@ class Player(object):
             self.volume = -1
         except ValueError:
             self.volume = 0
-        return self.volume           
+        return self.volume
 
     def get_bass(self):
         """Get Player Bass"""
         self.bass = int(self.request("mixer bass ?"))
-        return self.bass    
+        return self.bass
 
     def get_treble(self):
         """Get Player Treble"""
         self.treble = int(self.request("mixer treble ?"))
-        return self.treble 
+        return self.treble
 
     def get_pitch(self):
         """Get Player Pitch"""
         self.pitch = int(self.request("mixer pitch ?"))
         return self.pitch
-    
+
     def get_rate(self):
         """Get Player Rate"""
         self.rate = int(self.request("mixer rate ?"))
-        return self.rate     
+        return self.rate
 
     def get_muting(self):
         """Get Player Muting Status"""
@@ -255,7 +251,7 @@ class Player(object):
         """Set Player Muting Status"""
         self.request("mixer muting %i" % (int(state)))
         self.get_muting()
-    
+
     def get_track_genre(self):
         """Get Players Current Track Genre"""
         self.track_genre = str(self.request("genre ?"))
@@ -265,27 +261,27 @@ class Player(object):
         """Get Players Current Track Artist"""
         self.track_artist = str(self.request("artist ?"))
         return self.track_artist
-    
+
     def get_track_album(self):
         """Get Players Current Track Album"""
         self.track_album = str(self.request("album ?"))
         return self.track_album
-    
+
     def get_track_title(self):
         """Get Players Current Track Title"""
         self.track_title = str(self.request("title ?"))
         return self.track_title
-    
+
     def get_track_duration(self):
         """Get Players Current Track Duration"""
         self.track_duration = float(self.request("duration ?"))
-        return self.track_duration    
-    
+        return self.track_duration
+
     def get_track_remote(self):
         """Is Players Current Track Remotely Hosted?"""
         remote = int(self.request("remote ?"))
         self.track_remote = (remote != 0)
-        return self.track_remote  
+        return self.track_remote
 
     def get_track_current_title(self):
         """Get Players Current Track Current Title"""
@@ -296,19 +292,19 @@ class Player(object):
         """Get Players Current Track Path"""
         self.track_path = str(self.request("path ?"))
         return self.track_path
-    
+
     # playlist
-    
+
     def playlist_play(self, item):
         """Play Item Immediately"""
         item = self.__quote(item)
-        self.request("playlist play %s" % (item))        
+        self.request("playlist play %s" % (item))
 
     def playlist_add(self, item):
         """Add Item To Playlist"""
         item = self.__quote(item)
-        self.request("playlist add %s" % (item))    
-    
+        self.request("playlist add %s" % (item))
+
     def playlist_insert(self, item):
         """Insert Item Into Playlist (After Current Track)"""
         item = self.__quote(item)
@@ -318,7 +314,7 @@ class Player(object):
         """Delete Item From Playlist By Name"""
         item = self.__quote(item)
         self.request("playlist deleteitem %s" % (item))
-    
+
     def playlist_clear(self):
         """Clear the entire playlist. Will stop the player."""
         self.request("playlist clear")
@@ -326,19 +322,20 @@ class Player(object):
     def playlist_move(self, from_index, to_index):
         """Move Item In Playlist"""
         self.request("playlist move %i %i" % (from_index, to_index))
- 
+
     def playlist_erase(self, index):
         """Erase Item From Playlist"""
         self.request("playlist delete %i" % (index))
-    
+
     def playlist_track_count(self):
         """Get the amount of tracks in the current playlist"""
         return int(self.request('playlist tracks ?'))
-    
+
     def playlist_play_index(self, index):
-        """Play track at a certain position in the current playlist (index is zero-based)"""
+        """Play track at a certain position in the current playlist
+        (index is zero-based)"""
         return self.request('playlist index %i' % index)
-    
+
     def playlist_get_info(self):
         """Get info about the tracks in the current playlist"""
         amount = self.playlist_track_count()
@@ -346,7 +343,8 @@ class Player(object):
         encoded_list = response.split('playlist%20index')[1:]
         playlist = []
         for encoded in encoded_list:
-            data = [self.__unquote(x) for x in ('position' + encoded).split(' ')]
+            data = [self.__unquote(x) for x in
+                    ('position' + encoded).split(' ')]
             item = {}
             for info in data:
                 info = info.split(':')
@@ -358,31 +356,34 @@ class Player(object):
             item['duration'] = float(item['duration'])
             playlist.append(item)
         return playlist
-    
+
     # actions
-               
-    def show(self, line1="", 
-                   line2="", 
-                   duration=3, 
-                   brightness=4, 
-                   font="standard", 
-                   centered=False):
+
+    def show(
+            self,
+            line1="",
+            line2="",
+            duration=3,
+            brightness=4,
+            font="standard",
+            centered=False):
         """Displays text on Player display"""
         if font == "huge":
             line1 = ""
         line1, line2 = self.__quote(line1), self.__quote(line2)
         req_string = "show line1:%s line2:%s duration:%s "
         req_string += "brightness:%s font:%s centered:%i"
-        self.request(req_string % 
-                     (line1, line2, str(duration), str(brightness), font, int(centered)))
+        self.request(
+            req_string % (line1, line2, str(duration), str(brightness),
+                          font, int(centered)))
 
-    def display(self, line1="",
-                      line2="",
-                      duration=3):
+    def display(self,
+                line1="",
+                line2="",
+                duration=3):
         line1, line2 = self.__quote(line1), self.__quote(line2)
         req_string = "display %s %s %s"
-        self.request(req_string % 
-                     (line1, line2, str(duration)))
+        self.request(req_string % (line1, line2, str(duration)))
 
     def play(self):
         """Play"""
@@ -411,14 +412,14 @@ class Player(object):
     def prev(self):
         """Previous Track"""
         self.request("playlist jump -1")
-    
+
     def set_volume(self, volume):
         """Set Player Volume"""
         try:
-            volume = int(volume)            
-            if volume < 0: 
+            volume = int(volume)
+            if volume < 0:
                 volume = 0
-            if volume > 100: 
+            if volume > 100:
                 volume = 100
             self.request("mixer volume %i" % (volume))
         except TypeError:
@@ -428,9 +429,9 @@ class Player(object):
         """Set Player Bass"""
         try:
             bass = int(bass)
-            if bass < -100: 
+            if bass < -100:
                 bass = -100
-            if bass > 100: 
+            if bass > 100:
                 bass = 100
             self.request("mixer bass %i" % (bass))
         except TypeError:
@@ -444,7 +445,7 @@ class Player(object):
     def bass_down(self, amount=5):
         """Decrease Player Bass"""
         try:
-            amount = int(amount)            
+            amount = int(amount)
             self.request("mixer bass -%i" % (amount))
             self.get_bass()
         except TypeError:
@@ -453,7 +454,7 @@ class Player(object):
     def set_treble(self, treble):
         """Set Player Treble"""
         try:
-            treble = int(treble)       
+            treble = int(treble)
             if treble < -100:
                 treble = -100
             if treble > 100:
@@ -484,9 +485,9 @@ class Player(object):
         """Set Player Pitch"""
         try:
             pitch = int(pitch)
-            if pitch < 80: 
+            if pitch < 80:
                 pitch = 80
-            if pitch > 120: 
+            if pitch > 120:
                 pitch = 120
             self.request("mixer pitch %i" % (pitch))
         except TypeError:
@@ -495,7 +496,7 @@ class Player(object):
     def pitch_up(self, amount=5):
         """Increase Player Pitch"""
         try:
-            amount = int(amount)        
+            amount = int(amount)
             self.request("mixer pitch +%i" % (amount))
             self.get_pitch()
         except TypeError:
@@ -504,7 +505,7 @@ class Player(object):
     def pitch_down(self, amount=5):
         """Decrease Player Pitch"""
         try:
-            amount = int(amount)  
+            amount = int(amount)
             self.request("mixer pitch -%i" % (amount))
             self.get_pitch()
         except TypeError:
@@ -514,9 +515,9 @@ class Player(object):
         """Set Player Rate"""
         try:
             rate = int(rate)
-            if rate < -4: 
+            if rate < -4:
                 rate = 4
-            if rate > 4: 
+            if rate > 4:
                 rate = 4
             self.request("mixer rate %i" % (rate))
         except TypeError:
@@ -552,20 +553,20 @@ class Player(object):
     def volume_down(self, amount=5):
         """Decrease Player Volume"""
         try:
-            amount = int(amount)            
+            amount = int(amount)
             self.request("mixer volume -%i" % (amount))
             self.get_volume()
         except TypeError:
             pass
-    
+
     def mute(self):
         """Mute Player"""
         self.set_muting(True)
-        
+
     def unmute(self):
         """Unmute Player"""
         self.set_muting(False)
-    
+
     def seek_to(self, seconds):
         """Seek Player"""
         try:
@@ -573,12 +574,12 @@ class Player(object):
             self.request("time %s" % (seconds))
         except TypeError:
             pass
-        
+
     def forward(self, seconds=10):
         """Seek Player Forward"""
         try:
             seconds = int(seconds)
-            self.request("time +%s" % (seconds))        
+            self.request("time +%s" % (seconds))
         except TypeError:
             pass
 
@@ -586,13 +587,13 @@ class Player(object):
         """Seek Player Backwards"""
         try:
             seconds = int(seconds)
-            self.request("time -%s" % (seconds))   
+            self.request("time -%s" % (seconds))
         except TypeError:
             pass
 
     def ir_button(self, button):
         """Simulate IR Button Press"""
-        self.request("button %s" % (button)) 
+        self.request("button %s" % (button))
 
     def randomplay(self, type='tracks'):
         """play random mix"""
@@ -605,7 +606,7 @@ class Player(object):
     def unsync(self):
         """Unsync player"""
         self.request("sync -")
-        
+
     def __quote(self, text):
         try:
             import urllib.parse

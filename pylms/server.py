@@ -22,7 +22,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 import telnetlib
 import urllib
 from pylms.player import Player
-    
+
 
 class Server(object):
 
@@ -30,12 +30,14 @@ class Server(object):
     Server
     """
 
-    def __init__(self, hostname="localhost",
-                       port=9090, 
-                       username="", 
-                       password="",
-                       charset="utf8"):
-                       
+    def __init__(
+            self,
+            hostname="localhost",
+            port=9090,
+            username="",
+            password="",
+            charset="utf8"):
+
         """
         Constructor
         """
@@ -51,7 +53,7 @@ class Server(object):
         self.player_count = 0
         self.players = []
         self.charset = charset
-    
+
     def connect(self, update=True):
         """
         Connect
@@ -59,33 +61,40 @@ class Server(object):
         self.telnet_connect()
         self.login()
         self.get_players(update=update)
-        
+
+    def disconnect(self):
+        self.telnet.close()
+
     def telnet_connect(self):
         """
         Telnet Connect
         """
         self.telnet = telnetlib.Telnet(self.hostname, self.port)
-    
+
     def login(self):
         """
         Login
         """
         result = self.request("login %s %s" % (self.username, self.password))
         self.logged_in = (result == "******")
-        
+
     def request(self, command_string, preserve_encoding=False):
         """
         Request
         """
         # self.logger.debug("Telnet: %s" % (command_string))
         self.telnet.write(self.__encode(command_string + "\n"))
-        response = self.__decode(self.telnet.read_until(self.__encode("\n"))[:-1])
+        response = self.telnet.read_until(self.__encode("\n"))[:-1]
         if not preserve_encoding:
-            response = self.__unquote(response)
+            response = self.__decode(self.__unquote(response))
         else:
-            command_string_quoted = command_string[0:command_string.find(':')] + command_string[command_string.find(':'):].replace(':',self.__quote(':'))
+            command_string_quoted = \
+                command_string[0:command_string.find(':')] + \
+                command_string[command_string.find(':'):].replace(
+                    ':', self.__quote(':'))
         start = command_string.split(" ")[0]
-        if start in ["songinfo", "trackstat", "albums", "songs", "artists", "rescan", "rescanprogress"]:
+        if start in ["songinfo", "trackstat", "albums", "songs", "artists",
+                     "rescan", "rescanprogress"]:
             if not preserve_encoding:
                 result = response[len(command_string)+1:]
             else:
@@ -95,13 +104,12 @@ class Server(object):
                 result = response[len(command_string)-1:]
             else:
                 result = response[len(command_string_quoted)-1:]
-        result = result.strip()
         return result
 
     def request_with_results(self, command_string, preserve_encoding=False):
         """
         Request with results
-        Return tuple (count, results, error_occured)
+        Return tuple (count, results, error_occurred)
         """
         quotedColon = self.__quote(':')
         try:
@@ -111,20 +119,23 @@ class Server(object):
             resultStr = ' '+self.request(command_string, True)
             #get number of results
             count = 0
-            if resultStr.rfind('count%s'%quotedColon)>=0:
-                count = int(resultStr[resultStr.rfind('count%s'%quotedColon):].replace('count%s'%quotedColon,''))
-            #remove number of results from result string and cut result string by "id:"
+            if resultStr.rfind('count%s' % quotedColon) >= 0:
+                count = int(resultStr[resultStr.rfind(
+                    'count%s' % quotedColon):].replace(
+                    'count%s' % quotedColon, ''))
+            # remove number of results from result string and cut
+            # result string by "id:"
             idIsSep = True
-            if resultStr.find(' id%s'%quotedColon)<0:
+            if resultStr.find(' id%s' % quotedColon) < 0:
                 idIsSep = False
-            if resultStr.find('count')>=0:
+            if resultStr.find('count') >= 0:
                 resultStr = resultStr[:resultStr.rfind('count')-1]
-            results = resultStr.split(' id%s'%quotedColon)
+            results = resultStr.split(' id%s' % quotedColon)
 
             output = []
             for result in results:
                 result = result.strip()
-                if len(result)>0:
+                if len(result) > 0:
                     if idIsSep:
                         #fix missing 'id:' at beginning
                         result = 'id%s%s' % (quotedColon, result)
@@ -132,17 +143,16 @@ class Server(object):
                     item = {}
                     for subResult in subResults:
                         #save item
-                        key,value = subResult.split(quotedColon,1)
+                        key, value = subResult.split(quotedColon, 1)
                         if not preserve_encoding:
                             item[urllib.unquote(key)] = self.__unquote(value)
                         else:
                             item[key] = value
                     output.append(item)
-            return count,output,False
+            return count, output, False
         except Exception as e:
             #error parsing results (not correct?)
-            return 0,[],True
-
+            return 0, [], True
 
     def get_players(self, update=True):
         """
@@ -159,11 +169,13 @@ class Server(object):
         """
         Get Player
         """
-        ref = str(ref).lower()
+        if isinstance(ref, str):
+            ref = self.__decode(ref)
+        ref = ref.lower()
         if ref:
             for player in self.players:
-                player_name = str(player.name).lower()
-                player_ref = str(player.ref).lower()
+                player_name = player.name.lower()
+                player_ref = player.ref.lower()
                 if ref == player_ref or ref in player_name:
                     return player
 
@@ -173,7 +185,7 @@ class Server(object):
         """
         self.version = self.request("version ?")
         return self.version
-    
+
     def get_player_count(self):
         """
         Get Number Of Players
@@ -185,46 +197,50 @@ class Server(object):
         """
         Search term in database
         """
-        if mode=='albums':
-            return self.request_with_results("albums 0 50 tags:%s search:%s" % ("l", term))
-        elif mode=='songs':
-            return self.request_with_results("songs 0 50 tags:%s search:%s" % ("", term))
-        elif mode=='artists':
-            return self.request_with_results("artists 0 50 search:%s" % (term))
+        if mode == 'albums':
+            return self.request_with_results(
+                "albums 0 50 tags:%s search:%s" % ("l", term))
+        elif mode == 'songs':
+            return self.request_with_results(
+                "songs 0 50 tags:%s search:%s" % ("", term))
+        elif mode == 'artists':
+            return self.request_with_results(
+                "artists 0 50 search:%s" % (term))
 
     def rescan(self, mode='fast'):
         """
         Rescan library
-        Mode can be 'fast' for update changes on library, 'full' for complete library scan and 'playlists' for playlists scan only
+        Mode can be 'fast' for update changes on library, 'full' for
+        complete library scan and 'playlists' for playlists scan only
         """
         is_scanning = True
         try:
             is_scanning = bool(self.request("rescan ?"))
         except:
             pass
-        
+
         if not is_scanning:
-            if mode=='fast':
+            if mode == 'fast':
                 return self.request("rescan")
-            elif mode=='full':
+            elif mode == 'full':
                 return self.request("wipecache")
-            elif mode=='playlists':
+            elif mode == 'playlists':
                 return self.request("rescan playlists")
         else:
             return ""
-        
+
     def rescanprogress(self):
         """
         Return current rescan progress
         """
         return self.request_with_results("rescanprogress")
-    
+
     def __encode(self, text):
         return text.encode(self.charset)
-    
+
     def __decode(self, bytes):
         return bytes.decode(self.charset)
-    
+
     def __quote(self, text):
         try:
             import urllib.parse
