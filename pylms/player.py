@@ -327,6 +327,32 @@ class Player(object):
         """Erase Item From Playlist"""
         self.request("playlist delete %i" % (index))
 
+    def playlist_loadalbum(self, genre=None, artist=None, album=None):
+        """Add an album to the Playlist"""
+        if genre is None:
+            genre = '*'
+        genre = self.__quote(genre)
+        if artist is None:
+            artist = '*'
+        artist = self.__quote(artist)
+        if album is None:
+            album = '*'
+        album = self.__quote(album)
+        self.request("playlist loadalbum %s %s %s" % (genre, artist, album))
+
+    def playlist_addalbum(self, genre=None, artist=None, album=None):
+        """Add an album to the Playlist"""
+        if genre is None:
+            genre = '*'
+        genre = self.__quote(genre)
+        if artist is None:
+            artist = '*'
+        artist = self.__quote(artist)
+        if album is None:
+            album = '*'
+        album = self.__quote(album)
+        self.request("playlist addalbum %s %s %s" % (genre, artist, album))
+
     def playlist_track_count(self):
         """Get the amount of tracks in the current playlist"""
         return int(self.request('playlist tracks ?'))
